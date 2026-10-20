@@ -1,286 +1,192 @@
+import { MotionProvider } from "@/components/motion/motion-provider";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Section, SectionIndex } from "@/components/structure/section";
+import { PageHeader } from "@/components/structure/page-header";
 import { IndexRail } from "@/components/structure/index-rail";
 import { Reveal } from "@/components/primitives/reveal";
-import { FigurePlate } from "@/components/content/figure-plate";
 import { TeamCard } from "@/components/content/team-card";
 import { JsonLd } from "@/components/primitives/json-ld";
-import { team } from "@/content/team";
+import { publicTeam } from "@/content/team";
 import { breadcrumbSchema } from "@/lib/schema";
-import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { Mark } from "@/components/primitives/mark";
 import type { IconName } from "@/lib/icons";
-
-const railSections = ["01", "02", "03", "04"];
-
-/**
- * The Common Technical Document, the structure every submission is built
- * against. Public standard, so it is safe to state and useful to show.
- */
-const ctdModules = [
-  { n: "M1", name: "Regional" },
-  { n: "M2", name: "Summaries" },
-  { n: "M3", name: "Quality" },
-  { n: "M4", name: "Nonclinical" },
-  { n: "M5", name: "Clinical" },
-] as const;
-
 export const metadata: Metadata = {
-  title: "Practice & Operating Standard",
+  title: "Practice",
   description:
-    "How Ultra Pharma works, our regulatory team, operating principles, and execution models for healthcare products entering Kenya and East Africa.",
+    "How Ultra Pharma structures regulatory engagements, dossier reviews and market-access work in Kenya and East Africa.",
   alternates: { canonical: "/practice" },
 };
-
+const modules = ["Regional", "Summaries", "Quality", "Nonclinical", "Clinical"];
+const commitments = [
+  {
+    title: "Pre-submission CTD audits",
+    description:
+      "Module-by-module review of the dossier against the applicable requirements before filing.",
+  },
+  {
+    title: "A live document register",
+    description:
+      "A clear record of queries, document iterations and agreed milestone dates.",
+  },
+  {
+    title: "Technical regulatory liaison",
+    description:
+      "Preparation of technical responses and coordination of engagement with the relevant authorities.",
+  },
+];
 const principles: readonly {
   title: string;
   description: string;
   icon: IconName;
 }[] = [
   {
-    title: "No Blind Forwarding",
-    description:
-      "Every regulatory query from the Pharmacy and Poisons Board is thoroughly analyzed with recommended solutions and draft responses before reaching your desk.",
+    title: "Queries with a response",
     icon: "analysedQueries",
+    description:
+      "Regulatory questions are analysed alongside recommended actions and draft responses, giving you a clear next step.",
   },
   {
-    title: "Accountable Named Leads",
-    description:
-      "Engagements are led by qualified regulatory pharmacists with deep therapeutic category experience, not passed down to junior account handlers.",
+    title: "Accountable named leads",
     icon: "namedLead",
+    description:
+      "A named point of contact coordinates the work, the document register and communication through the engagement.",
   },
   {
-    title: "Financing & HTA Synergy",
-    description:
-      "We connect market authorization directly to Social Health Authority (SHA) and BPTAP reimbursement pathways so products become commercially funded.",
+    title: "Evidence alongside approval",
     icon: "financingSynergy",
+    description:
+      "The evidence for reimbursement is considered alongside the registration strategy, keeping access questions visible.",
   },
   {
-    title: "EAC Regional Harmonisation",
-    description:
-      "Submissions are architected to leverage Kenyan approvals for mutual recognition and joint assessments across Uganda, Tanzania, and Rwanda.",
+    title: "A regional perspective",
     icon: "regionalHarmonisation",
+    description:
+      "Dossiers are structured with local requirements and regional harmonisation in mind, while checking what each market requires.",
   },
 ];
-
-/**
- * The three method commitments. Each is a different promise, so each carries a
- * different mark rather than three identical ticks.
- */
-const commitments: readonly {
-  title: string;
-  description: string;
-  icon: IconName;
-}[] = [
-  {
-    title: "Pre-Submission CTD Audits",
-    description:
-      "Complete module-by-module compliance audit before submission fees are incurred.",
-    icon: "preSubmissionAudit",
-  },
-  {
-    title: "Live Document Register",
-    description:
-      "Transparent status tracking covering every query, document iteration, and milestone date.",
-    icon: "documentRegister",
-  },
-  {
-    title: "Active Regulatory Representation",
-    description:
-      "Direct technical liaison with committee evaluators during formal board sittings.",
-    icon: "boardRepresentation",
-  },
-];
-
 export default function PracticePage() {
   return (
     <>
-      <JsonLd data={breadcrumbSchema([{ name: "Practice", path: "/practice" }])} />
-      <IndexRail sections={railSections} />
-
-      {/* Header Section with generous breathing room */}
-      <section className="border-b border-rule bg-paper-sunk/30">
-        <div className="mx-auto max-w-[1440px] px-6 pb-16 pt-36 sm:pt-40">
-          <div className="flex flex-col items-center text-center mx-auto max-w-[1040px] gap-5 w-full">
-            <div className="inline-flex items-center justify-center gap-2 text-xs font-mono tracking-wider text-stamp-700 uppercase">
-              <span className="h-1.5 w-1.5 rounded-full bg-stamp-600" aria-hidden />
-              <span>Ultra Pharma / Firm & Operating Standard</span>
+      <JsonLd
+        data={breadcrumbSchema([{ name: "Practice", path: "/practice" }])}
+      />
+      <IndexRail sections={["01", "02", "03", "04"]} />
+      <PageHeader
+        title="The practice"
+        description="Careful dossiers. Clear communication. An in-country perspective on the decisions that move healthcare products forward."
+      />
+      <Section index="01" bordered>
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
+          <Reveal className="panel">
+            <div className="mb-8 flex items-center justify-between gap-4">
+              <span className="t-label text-ink-500">
+                The Common Technical Document
+              </span>
+              <span className="t-index text-ink-500">CTD</span>
             </div>
-
-            <h1 className="m-0 font-display text-[2.25rem] sm:text-[2.625rem] lg:text-[3rem] font-medium text-ink-900 leading-[1.16] tracking-tight text-balance">
-              Practice & Operating Standard
-            </h1>
-
-            <p className="m-0 text-ink-600 font-light text-[1.0625rem] sm:text-[1.1875rem] leading-relaxed max-w-[72ch] text-balance">
-              How we structure regulatory engagements, the practitioners leading the dossiers, and the rigorous principles that define our track record in Kenya and East Africa.
+            <h2 className="t-h3 mb-8 mt-0">
+              Five modules.
+              <br />
+              One coherent dossier.
+            </h2>
+            <ol className="m-0 list-none p-0">
+              {modules.map((name, i) => (
+                <li
+                  key={name}
+                  className="flex items-baseline justify-between border-t border-rule py-4"
+                >
+                  <span>{name}</span>
+                  <span className="t-index text-ink-500">M{i + 1}</span>
+                </li>
+              ))}
+            </ol>
+            <p className="mb-0 mt-5 text-sm text-ink-500">
+              From gap analysis to a filing plan.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 01 · Methodology & Infrastructure */}
-      <Section index="01" width="wide" className="border-b border-rule">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          <div className="order-1 lg:order-2 lg:col-span-6 flex flex-col justify-between">
+          </Reveal>
+          <div>
             <Reveal>
-              <SectionIndex index="01" label="Methodology" className="mb-6" />
-              <h2 className="t-h2 m-0 font-display font-medium text-ink-900 leading-tight">
+              <SectionIndex index="01" label="Methodology" />
+              <h2 className="t-h2 mb-6 mt-5">
                 Dossiers, deadlines, and technical depth
               </h2>
-              <p className="t-lede mt-5 text-ink-700 font-light leading-relaxed">
-                We work in rigorous dossiers and committed deadlines. Every engagement begins with an exhaustive gap analysis against active Pharmacy and Poisons Board CTD guidelines, followed by a time-bound filing plan.
+              <p className="t-lede text-ink-700">
+                Every engagement begins with the evidence in hand, the gaps to
+                close, and the requirements that apply. From there, we agree a
+                filing plan and a clear register of responsibilities.
               </p>
             </Reveal>
-
-            <div className="mt-8 flex flex-col gap-4 border-t border-rule/80 pt-6">
-              {commitments.map((commitment) => (
-                <div key={commitment.title} className="flex items-start gap-3">
-                  <Mark
-                    name={commitment.icon}
-                    size={20}
-                    weight="duotone"
-                    className="text-stamp-600 shrink-0 mt-0.5"
-                  />
-                  <p className="t-body-sm m-0 text-ink-700 font-light">
-                    <strong className="font-medium text-ink-900">
-                      {commitment.title}:
-                    </strong>{" "}
-                    {commitment.description}
-                  </p>
+            <div className="mt-8">
+              {commitments.map((item) => (
+                <div key={item.title} className="border-t border-rule py-5">
+                  <h3 className="m-0 text-base font-medium">{item.title}</h3>
+                  <p className="mb-0 mt-2 text-ink-700">{item.description}</p>
                 </div>
               ))}
             </div>
           </div>
-
-          <div className="order-2 lg:order-1 lg:col-span-6">
-            <Reveal>
-              <div className="overflow-hidden rounded-[26px] border border-rule/80 bg-paper-raised shadow-xs">
-                {/*
-                  A stock office interior said nothing about how the work is
-                  done. The dossier does: five CTD modules, the structure every
-                  submission is built and audited against.
-                */}
-                <div className="overflow-hidden">
-                  <FigurePlate
-                    icon="ctdDossier"
-                    label="CTD dossier"
-                    title="Five modules, audited before a fee is paid"
-                    markSize={220}
-                    field="ledger"
-                    tone="sunk"
-                    aspect="3/2"
-                    className="rounded-none"
-                  >
-                    <ul className="m-0 flex list-none flex-col p-0">
-                      {ctdModules.map((module) => (
-                        <li
-                          key={module.n}
-                          className="flex items-baseline justify-between gap-4 border-t border-rule/70 py-2 first:border-t-0"
-                        >
-                          <span className="t-body-sm font-light text-ink-700">
-                            {module.name}
-                          </span>
-                          <span className="font-mono text-[0.75rem] text-stamp-700">
-                            {module.n}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </FigurePlate>
-                </div>
-                <div className="p-6 border-t border-rule/70 flex items-center justify-between text-xs font-mono text-ink-500">
-                  <span>Gap analysis to filing plan</span>
-                  <span className="text-stamp-700 font-medium">Against active PPB CTD guidelines</span>
-                </div>
-              </div>
-            </Reveal>
-          </div>
         </div>
       </Section>
-
-      {/* 02 · Operating Principles */}
-      <Section index="02" width="wide" tone="sunk" bordered className="border-b border-rule">
-        <Reveal className="mb-14 flex flex-wrap items-end justify-between gap-8">
-          <div className="max-w-[500px]">
-            <SectionIndex index="02" label="Principles" className="mb-6" />
-            <h2 className="t-h2 m-0 font-display font-medium text-ink-900">
-              How we protect your timelines
-            </h2>
+      <Section index="02" tone="sunk" bordered>
+        <Reveal className="section-top">
+          <div>
+            <SectionIndex index="02" label="Principles" />
+            <h2 className="t-h2">Clarity at every step</h2>
           </div>
-          <p className="t-body max-w-[48ch] text-ink-600 font-light leading-relaxed m-0 pb-1">
-            The operational tenets that distinguish our advisory work from generic forwarding agencies.
+          <p>
+            The working principles behind our regulatory and market-access
+            engagements.
           </p>
         </Reveal>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {principles.map((principle) => (
-            <Reveal
-              key={principle.title}
-              className="group relative overflow-hidden rounded-[24px] border border-rule/80 bg-paper-raised p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-rule-strong hover:shadow-card"
-            >
-              {/* Soft background artwork icon */}
-              <div
-                className="pointer-events-none absolute -bottom-5 -right-5 text-ink-900/[0.04] dark:text-stamp-400/[0.07] transition-all duration-500 ease-out group-hover:text-stamp-700/[0.12] dark:group-hover:text-stamp-400/[0.16] group-hover:scale-105 group-hover:-rotate-3"
-                aria-hidden
-              >
-                <Mark name={principle.icon} size={145} weight="duotone" />
-              </div>
-
-              <div className="relative z-10">
-                <h3 className="font-display text-lg font-medium text-ink-900 m-0">
-                  {principle.title}
-                </h3>
-                <p className="t-body-sm mt-3 text-ink-600 font-light leading-relaxed m-0 text-sm">
-                  {principle.description}
-                </p>
-              </div>
-            </Reveal>
+        <div data-reveal-group className="grid gap-6 md:grid-cols-2">
+          {principles.map((item) => (
+            <article key={item.title} className="panel">
+              <span className="surface-mark mb-7">
+                <Mark name={item.icon} size={26} weight="duotone" />
+              </span>
+              <h3 className="t-h3 m-0">{item.title}</h3>
+              <p className="mb-0 mt-4 text-ink-700">{item.description}</p>
+            </article>
           ))}
         </div>
       </Section>
-
-      {/* 03 · The People Who Lead the Work */}
-      <Section index="03" width="wide" className="border-b border-rule">
-        <Reveal className="mb-14 flex flex-wrap items-end justify-between gap-8">
-          <p className="order-2 lg:order-1 t-body max-w-[48ch] text-ink-600 font-light leading-relaxed m-0 pb-1">
-            Named leads with verifiable credentials, specialized therapeutic experience, and in-country regulatory accountability.
-          </p>
-          <div className="order-1 lg:order-2 max-w-[500px]">
-            <SectionIndex index="03" label="Practitioners" className="mb-6" />
-            <h2 className="t-h2 m-0 font-display font-medium text-ink-900">The people who do the work</h2>
+      <Section index="03" bordered>
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+          <Reveal>
+            <SectionIndex index="03" label="People" />
+            <h2 className="t-h2 mb-6 mt-5">The people who do the work</h2>
+            <p className="max-w-[46ch] text-ink-700">
+              Speak with our principal contact about your product, your current
+              evidence and the regulatory or access questions ahead.
+            </p>
+          </Reveal>
+          <div data-reveal-group>
+            {publicTeam.map((member) => (
+              <TeamCard key={member.initials} member={member} />
+            ))}
           </div>
-        </Reveal>
-
-        <div
-          data-reveal-group
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {team.map((member) => (
-            <TeamCard key={member.initials} member={member} />
-          ))}
         </div>
       </Section>
-
-      {/* 04 · Engagement Next Step (Alternating Sunk Tone) */}
-      <Section index="04" width="wide" tone="sunk" bordered>
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 rounded-[28px] border border-rule bg-paper-raised p-8 lg:p-12 shadow-xs">
-          <div className="max-w-[640px]">
-            <SectionIndex index="04" label="Engagement" className="mb-4" />
-            <h2 className="t-h2 m-0 font-display font-medium text-ink-900">
+      <Section index="04" tone="sunk" bordered>
+        <div className="panel flex flex-wrap items-center justify-between gap-8">
+          <div className="max-w-[620px]">
+            <SectionIndex index="04" label="Engagement" />
+            <h2 className="t-h2 mb-5 mt-5">
               Start with a confidential dossier gap audit
             </h2>
-            <p className="t-body mt-3 text-ink-600 font-light leading-relaxed">
-              Submit your active CTD files or product profiles for an objective feasibility assessment, timeline projection, and regulatory roadmap.
+            <p className="mb-0 text-ink-700">
+              Tell us about the product and its current stage. We can agree a
+              confidentiality arrangement before proprietary dossier material is
+              shared.
             </p>
           </div>
-
-          <Link href="/contact" className="btn btn-primary btn-lg group shrink-0">
-            <span>Initiate consultation</span>
-            <ArrowRight size={18} weight="bold" className="transition-transform duration-200 group-hover:translate-x-1" aria-hidden />
+          <Link href="/contact" className="btn btn-primary">
+            Discuss an engagement
           </Link>
         </div>
       </Section>
+      <MotionProvider />
     </>
   );
 }

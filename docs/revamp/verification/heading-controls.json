@@ -1,0 +1,132 @@
+[
+  {
+    "buttons": [
+      {
+        "height": 44,
+        "width": 148.16250610351562
+      },
+      {
+        "height": 44,
+        "width": 102.57500457763672
+      }
+    ],
+    "heading": [
+      {
+        "font": "38px",
+        "height": 81.30000305175781,
+        "line": "40.66px"
+      },
+      {
+        "font": "38px",
+        "height": 81.30000305175781,
+        "line": "40.66px"
+      }
+    ],
+    "overflow": false,
+    "width": 320
+  },
+  {
+    "buttons": [
+      {
+        "height": 44,
+        "width": 148.16250610351562
+      },
+      {
+        "height": 44,
+        "width": 102.57500457763672
+      }
+    ],
+    "heading": [
+      {
+        "font": "38px",
+        "height": 81.30000305175781,
+        "line": "40.66px"
+      },
+      {
+        "font": "38px",
+        "height": 81.30000305175781,
+        "line": "40.66px"
+      }
+    ],
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "buttons": [
+      {
+        "height": 44,
+        "width": 148.16250610351562
+      },
+      {
+        "height": 44,
+        "width": 102.57500457763672
+      }
+    ],
+    "heading": [
+      {
+        "font": "66.56px",
+        "height": 71.2125015258789,
+        "line": "71.2192px"
+      },
+      {
+        "font": "66.56px",
+        "height": 71.2125015258789,
+        "line": "71.2192px"
+      }
+    ],
+    "overflow": false,
+    "width": 1024
+  },
+  {
+    "buttons": [
+      {
+        "height": 44,
+        "width": 148.16250610351562
+      },
+      {
+        "height": 44,
+        "width": 102.57500457763672
+      }
+    ],
+    "heading": [
+      {
+        "font": "62.64px",
+        "height": 134.02500915527344,
+        "line": "67.0248px"
+      },
+      {
+        "font": "62.64px",
+        "height": 134.02500915527344,
+        "line": "67.0248px"
+      }
+    ],
+    "overflow": false,
+    "width": 1440
+  },
+  {
+    "buttons": [
+      {
+        "height": 44,
+        "width": 148.16250610351562
+      },
+      {
+        "height": 44,
+        "width": 102.57500457763672
+      }
+    ],
+    "heading": [
+      {
+        "font": "70px",
+        "height": 149.8000030517578,
+        "line": "74.9px"
+      },
+      {
+        "font": "70px",
+        "height": 149.8000030517578,
+        "line": "74.9px"
+      }
+    ],
+    "overflow": false,
+    "width": 1920
+  }
+]

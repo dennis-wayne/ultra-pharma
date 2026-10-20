@@ -74,3 +74,6 @@ export type CaseNote = {
 };
 
 export const caseNotes: readonly CaseNote[] = [];
+
+/** Presentation fixtures never render as public staff identities. */
+export const publicTeam = team.filter((member) => member.verified === true);

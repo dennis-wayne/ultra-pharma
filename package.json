@@ -9,7 +9,10 @@
     "lint": "eslint",
     "lint:strings": "tsx scripts/check-strings.ts",
     "lint:icons": "tsx scripts/check-icons.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "audit:prepare": "node scripts/prepare-audit.mjs",
+    "format": "prettier --write app components lib content scripts tests"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -26,10 +29,14 @@
     "gsap": "^3.15.0",
     "next": "^15.5.23",
     "next-themes": "^0.4.6",
-    "nodemailer": "^9.0.5",
+    "nodemailer": "^10.1.7",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "tailwind-merge": "^3.3.1"
+  },
+  "overrides": {
+    "postcss": "^8.5.31",
+    "brace-expansion@^1.1.7": "^1.1.21"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -37,8 +44,10 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "axe-core": "^4.14.0",
     "eslint": "^9",
     "eslint-config-next": "^15.5.23",
+    "prettier": "^3.9.10",
     "tailwindcss": "^4",
     "tsx": "^4.23.12",
     "typescript": "^5"

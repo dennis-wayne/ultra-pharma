@@ -1,220 +1,112 @@
+import { MotionProvider } from "@/components/motion/motion-provider";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ContactForm } from "@/components/forms/contact-form";
-import { FigurePlate } from "@/components/content/figure-plate";
+import { ContactDetails } from "@/components/content/contact-details";
+import { PageHeader } from "@/components/structure/page-header";
+import { Reveal } from "@/components/primitives/reveal";
 import { JsonLd } from "@/components/primitives/json-ld";
-import { channels, site } from "@/content/site";
 import { contactPageSchema, breadcrumbSchema } from "@/lib/schema";
-import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { Mark } from "@/components/primitives/mark";
 import type { IconName } from "@/lib/icons";
-
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contact our regulatory team in Nairobi about PPB drug registration, SHA reimbursement and HTA submissions, or EAC market access.",
+    "Contact Ultra Pharma in Nairobi about PPB registration, HTA evidence, reimbursement and regional market access.",
   alternates: { canonical: "/contact" },
 };
-
-const channelIcons = {
-  Email: "email",
-  Phone: "phone",
-  LinkedIn: "linkedin",
-  Location: "place",
-} satisfies Record<string, IconName>;
-
-/**
- * Process commitments the firm makes to every new enquiry, phrased as what
- * will happen rather than as an existing capability. `01 D-03`: no claim ships
- * that cannot be checked, and a promise about how an enquiry will be handled
- * is checkable in a way that an assertion of existing bench strength is not.
- */
-const advisorySteps: readonly {
-  title: string;
-  description: string;
-  icon: IconName;
-}[] = [
-  {
-    title: "Confidential intake",
-    description: "Initial gap analysis, with a confidentiality agreement available before any proprietary dossier data or product detail is shared.",
-    /* The same mark as the NDA pill on the form. One promise, one mark. */
-    icon: "confidentiality",
-  },
-  {
-    title: "Named lead",
-    description: "Direct alignment with a named in-country regulatory lead for your enquiry, not a general inbox.",
-    /* Shared with the operating principle of the same name on `/practice`. */
-    icon: "namedLead",
-  },
-  {
-    title: "Filing roadmap",
-    description: "A document register, milestone checklist, and filing dates we hold ourselves to, once an engagement begins.",
-    icon: "filingRoadmap",
-  },
-];
-
+const steps: readonly { title: string; description: string; icon: IconName }[] =
+  [
+    {
+      title: "Confidential intake",
+      icon: "confidentiality",
+      description:
+        "Begin with an outline of your enquiry. A confidentiality agreement is available before proprietary dossier data or product details are shared.",
+    },
+    {
+      title: "A named lead",
+      icon: "namedLead",
+      description:
+        "Your enquiry is aligned with a named point of contact, with scope and responsibilities agreed before work begins.",
+    },
+    {
+      title: "A practical roadmap",
+      icon: "filingRoadmap",
+      description:
+        "Once an engagement begins, the work is organised around a document register, milestones and the applicable requirements.",
+    },
+  ];
 export default function ContactPage() {
   return (
     <>
       <JsonLd data={contactPageSchema()} />
-      <JsonLd data={breadcrumbSchema([{ name: "Contact", path: "/contact" }])} />
-
-      {/* Header Section with generous breathing room */}
-      <section className="border-b border-rule bg-paper-sunk/30">
-        <div className="mx-auto max-w-[1440px] px-6 pb-16 pt-36 sm:pt-40">
-          <div className="flex flex-col items-center text-center mx-auto max-w-[1040px] gap-5 w-full">
-            <div className="inline-flex items-center justify-center gap-2 text-xs font-mono tracking-wider text-stamp-700 uppercase">
-              <span className="h-1.5 w-1.5 rounded-full bg-stamp-600" aria-hidden />
-              <span>Ultra Pharma / Advisory & Technical Services</span>
+      <JsonLd
+        data={breadcrumbSchema([{ name: "Contact", path: "/contact" }])}
+      />
+      <PageHeader
+        title="Let's talk about your next step"
+        description="A registration question, an evidence gap, or a regional market-entry plan. Start with a short outline of what you need."
+      />
+      <section className="shell section-space">
+        <div className="grid items-start gap-12 lg:grid-cols-[.85fr_1.15fr] lg:gap-20">
+          <Reveal>
+            <h2 className="t-h3 mb-7 mt-0">Direct contact</h2>
+            <ContactDetails />
+            <div className="panel mt-8">
+              <span className="t-label text-ink-500">Based in Nairobi</span>
+              <p className="mb-0 mt-7 font-display text-3xl leading-tight">
+                Local perspective.
+                <br />
+                Regional reach.
+              </p>
+              <p className="mb-0 mt-5 text-ink-700">
+                Regulatory affairs and market-access support for Kenya and East
+                Africa.
+              </p>
             </div>
-
-            <h1 className="m-0 font-display text-[2.25rem] sm:text-[2.625rem] lg:text-[3rem] font-medium text-ink-900 leading-[1.16] tracking-tight text-balance">
-              Direct Consultation & Case Assessment
-            </h1>
-
-            <p className="m-0 text-ink-600 font-light text-[1.0625rem] sm:text-[1.1875rem] leading-relaxed max-w-[72ch] text-balance">
-              Consult with our regulatory leads in Nairobi to evaluate PPB dossier requirements, plan SHA/HTA reimbursement submissions, or structure regional market entry.
+            <p className="mt-6 text-sm text-ink-500">
+              Please avoid sending patient information or confidential dossier
+              files through this initial enquiry form.
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Main Form & Info Grid */}
-      <section className="mx-auto max-w-[1440px] px-6 py-14 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
-          {/* Left Column: Direct Channels & Operational Context (5 cols) */}
-          <div className="lg:col-span-5 flex flex-col gap-10">
-            <div>
-              <span className="t-label text-xs uppercase tracking-widest text-ink-400 font-medium mb-6 block">
-                Direct Channels
-              </span>
-
-              <div className="border-t border-rule/80">
-                {channels.map((channel) => {
-                  const icon = channelIcons[channel.label as keyof typeof channelIcons] ?? "place";
-                  return (
-                    <Link
-                      key={channel.label}
-                      href={channel.href}
-                      className="group flex items-center justify-between border-b border-rule/80 py-4.5 no-underline transition-colors duration-200 hover:border-stamp-600/60"
-                      {...(channel.external
-                        ? { target: "_blank", rel: "noopener noreferrer" }
-                        : {})}
-                    >
-                      <div className="flex items-center gap-3">
-                        <Mark name={icon} size={18} className="text-stamp-600 shrink-0" />
-                        <span className="t-label text-ink-500 font-medium tracking-wider text-xs">
-                          {channel.label}
-                        </span>
-                      </div>
-                      <span className="t-data text-ink-900 group-hover:text-stamp-700 transition-colors inline-flex items-center gap-1.5 font-normal text-sm">
-                        <span>{channel.value}</span>
-                        {channel.external && (
-                          <ArrowUpRight size={13} className="text-ink-400" aria-hidden />
-                        )}
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Nairobi Headquarters Location Card */}
-            <div className="rounded-[24px] border border-rule/80 bg-paper-raised overflow-hidden shadow-xs">
-              {/*
-                Place, drawn as a graticule rather than borrowed as a skyline.
-                The coordinate is the city's, which is as precise as the firm's
-                published address currently goes.
-              */}
-              <div className="overflow-hidden">
-                <FigurePlate
-                  icon="place"
-                  label="Nairobi, Kenya"
-                  note="1.2921 S, 36.8219 E"
-                  field="graticule"
-                  tone="sunk"
-                  aspect="16/9"
-                  markSize={230}
-                  className="rounded-none"
-                />
-              </div>
-              <div className="p-6">
-                <div className="flex items-center gap-2 text-xs font-mono text-stamp-700 uppercase tracking-wider font-medium">
-                  <Mark name="place" size={14} className="text-stamp-600" />
-                  <span>Nairobi Headquarters</span>
-                </div>
-                <div className="mt-4 flex items-center gap-2 text-xs font-mono text-ink-400 border-t border-rule/60 pt-3">
-                  <Mark name="openingHours" size={13} />
-                  <span>Mon – Fri: 08:30 – 17:30 EAT (GMT+3)</span>
-                </div>
-              </div>
-            </div>
-
-            <p className="t-body-sm m-0 text-ink-500">{site.responseNote}</p>
-          </div>
-
-          {/* Right Column: Contact Form Card (7 cols) - uncarded below md */}
-          <div className="lg:col-span-7 rounded-none border-0 bg-transparent p-0 shadow-none md:rounded-[28px] md:border md:border-rule/90 md:bg-paper-raised md:p-8 lg:p-12 md:shadow-xs">
-            <div className="mb-8 flex items-center justify-between border-b border-rule/80 pb-6">
+          </Reveal>
+          <div className="panel">
+            <div className="mb-8 flex flex-wrap items-start justify-between gap-4 border-b border-rule pb-7">
               <div>
-                <span className="t-label text-xs uppercase tracking-widest text-stamp-700 font-medium">
-                  Technical Enquiry
-                </span>
-                <h2 className="mt-1 font-display text-2xl font-medium text-ink-900 m-0">
-                  Send a Case Briefing
-                </h2>
+                <h2 className="t-h3 m-0">Send an enquiry</h2>
+                <p className="mb-0 mt-2 text-ink-500">
+                  Tell us where your product stands.
+                </p>
               </div>
-              <span className="flex items-center gap-1.5 text-xs font-mono text-ink-500 bg-paper-sunk border border-rule px-3 py-1.5 rounded-full">
-                <Mark name="confidentiality" size={16} className="text-stamp-600" />
-                <span>NDA on request</span>
-              </span>
+              <span className="stamp-pill">NDA available on request</span>
             </div>
-
             <ContactForm />
           </div>
         </div>
       </section>
-
-      {/* Engagement Workflow 3-Step Strip (Alternating Sunk Tone) */}
-      <section className="border-t border-rule bg-paper-sunk/60 py-20 lg:py-24">
-        <div className="mx-auto max-w-[1440px] px-6">
-          <div className="mb-12 text-center max-w-[600px] mx-auto">
-            <span className="t-label text-xs uppercase tracking-widest text-stamp-700 font-medium">
-              Engagement Standard
-            </span>
-            <h2 className="mt-2 font-display text-2xl sm:text-3xl font-medium text-ink-900 m-0">
-              How we onboard new cases
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {advisorySteps.map((step) => (
-              <div
-                key={step.title}
-                className="group relative overflow-hidden rounded-[24px] border border-rule/80 bg-paper-raised p-8 sm:p-9 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-rule-strong hover:shadow-card"
-              >
-                {/* Soft background artwork icon */}
-                <div
-                  className="pointer-events-none absolute -bottom-6 -right-6 text-ink-900/[0.04] dark:text-stamp-400/[0.07] transition-all duration-500 ease-out group-hover:text-stamp-700/[0.12] dark:group-hover:text-stamp-400/[0.16] group-hover:scale-105 group-hover:-rotate-3"
-                  aria-hidden
-                >
-                  <Mark name={step.icon} size={160} weight="duotone" />
+      <section className="border-t border-rule bg-paper-sunk">
+        <div className="shell section-space">
+          <Reveal className="section-top">
+            <div>
+              <span className="t-label text-ink-500">Working together</span>
+              <h2 className="t-h2">What happens next</h2>
+            </div>
+          </Reveal>
+          <div data-reveal-group className="grid gap-6 md:grid-cols-3">
+            {steps.map((step, i) => (
+              <article key={step.title} className="panel">
+                <div className="flex items-center justify-between gap-5">
+                  <span className="surface-mark">
+                    <Mark name={step.icon} size={26} weight="duotone" />
+                  </span>
+                  <span className="t-index text-ink-500">0{i + 1}</span>
                 </div>
-
-                <div className="relative z-10">
-                  <h3 className="font-display text-xl font-medium text-ink-900 m-0">
-                    {step.title}
-                  </h3>
-                  <p className="t-body-sm mt-3 text-ink-600 font-light leading-relaxed m-0 text-[0.9375rem]">
-                    {step.description}
-                  </p>
-                </div>
-              </div>
+                <h3 className="t-h3 mb-4 mt-7">{step.title}</h3>
+                <p className="m-0 text-ink-700">{step.description}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
+      <MotionProvider />
     </>
   );
 }

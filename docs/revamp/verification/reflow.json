@@ -1,0 +1,72 @@
+[
+  {
+    "overflow": false,
+    "practiceCards": 6,
+    "scrollWidth": 306,
+    "serviceCards": 4,
+    "width": 320
+  },
+  {
+    "overflow": false,
+    "practiceCards": 6,
+    "scrollWidth": 345,
+    "serviceCards": 4,
+    "width": 360
+  },
+  {
+    "overflow": false,
+    "practiceCards": 6,
+    "scrollWidth": 753,
+    "serviceCards": 4,
+    "width": 768
+  },
+  {
+    "overflow": false,
+    "practiceCards": 6,
+    "scrollWidth": 1009,
+    "serviceCards": 4,
+    "width": 1024
+  },
+  {
+    "overflow": false,
+    "practiceCards": 6,
+    "scrollWidth": 1905,
+    "serviceCards": 4,
+    "width": 1920
+  },
+  {
+    "overflow": false,
+    "path": "/services",
+    "width": 320
+  },
+  {
+    "overflow": false,
+    "path": "/services/reimbursement",
+    "width": 320
+  },
+  {
+    "overflow": false,
+    "path": "/practice",
+    "width": 320
+  },
+  {
+    "overflow": false,
+    "path": "/insights",
+    "width": 320
+  },
+  {
+    "overflow": false,
+    "path": "/contact",
+    "width": 320
+  },
+  {
+    "overflow": false,
+    "path": "/legal/privacy",
+    "width": 320
+  },
+  {
+    "overflow": false,
+    "path": "/insights/reading-the-bptap-mandate",
+    "width": 320
+  }
+]

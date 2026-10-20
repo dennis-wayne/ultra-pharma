@@ -58,6 +58,16 @@ export const insights: readonly Insight[] = [
   },
 ];
 
+export function topicMark(category: Insight["category"]) {
+  return {
+    Reimbursement: "topicReimbursement",
+    Policy: "topicPolicy",
+    Approval: "topicApproval",
+    "Market entry": "topicMarketEntry",
+  }[category] as
+    "topicReimbursement" | "topicPolicy" | "topicApproval" | "topicMarketEntry";
+}
+
 export function getInsight(slug: string): Insight | undefined {
   return insights.find((post) => post.slug === slug);
 }

@@ -1,0 +1,124 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "h1": 1,
+    "main": 1,
+    "noDemoPeopleOrRemovedMedia": true,
+    "passed": true
+  },
+  {
+    "path": "/services",
+    "status": 200,
+    "h1": 1,
+    "main": 1,
+    "noDemoPeopleOrRemovedMedia": true,
+    "passed": true
+  },
+  {
+    "path": "/services/reimbursement",
+    "status": 200,
+    "h1": 1,
+    "main": 1,
+    "noDemoPeopleOrRemovedMedia": true,
+    "passed": true
+  },
+  {
+    "path": "/practice",
+    "status": 200,
+    "h1": 1,
+    "main": 1,
+    "noDemoPeopleOrRemovedMedia": true,
+    "passed": true
+  },
+  {
+    "path": "/insights",
+    "status": 200,
+    "h1": 1,
+    "main": 1,
+    "noDemoPeopleOrRemovedMedia": true,
+    "passed": true
+  },
+  {
+    "path": "/contact",
+    "status": 200,
+    "h1": 1,
+    "main": 1,
+    "noDemoPeopleOrRemovedMedia": true,
+    "passed": true
+  },
+  {
+    "path": "/legal/privacy",
+    "status": 200,
+    "h1": 1,
+    "main": 1,
+    "noDemoPeopleOrRemovedMedia": true,
+    "passed": true
+  },
+  {
+    "path": "/legal/terms",
+    "status": 200,
+    "h1": 1,
+    "main": 1,
+    "noDemoPeopleOrRemovedMedia": true,
+    "passed": true
+  },
+  {
+    "path": "/insights/sha-benefits-package-registered-product",
+    "status": 200,
+    "h1": 1,
+    "main": 1,
+    "noDemoPeopleOrRemovedMedia": true,
+    "passed": true
+  },
+  {
+    "path": "/insights/reading-the-bptap-mandate",
+    "status": 200,
+    "h1": 1,
+    "main": 1,
+    "noDemoPeopleOrRemovedMedia": true,
+    "passed": true
+  },
+  {
+    "path": "/insights/what-drives-a-ppb-review-timeline",
+    "status": 200,
+    "h1": 1,
+    "main": 1,
+    "noDemoPeopleOrRemovedMedia": true,
+    "passed": true
+  },
+  {
+    "path": "/insights/eac-harmonisation-and-the-second-market",
+    "status": 200,
+    "h1": 1,
+    "main": 1,
+    "noDemoPeopleOrRemovedMedia": true,
+    "passed": true
+  },
+  {
+    "path": "/revamp-not-found",
+    "status": 404,
+    "passed": true
+  },
+  {
+    "path": "/insights/not-a-published-article",
+    "status": 404,
+    "passed": true
+  },
+  {
+    "path": "/about",
+    "status": 308,
+    "location": "/practice",
+    "passed": true
+  },
+  {
+    "path": "/robots.txt",
+    "status": 200,
+    "passed": true
+  },
+  {
+    "path": "/sitemap.xml",
+    "status": 200,
+    "passed": true
+  }
+]

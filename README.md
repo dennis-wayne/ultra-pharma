@@ -8,9 +8,16 @@ Icons, GSAP, MDX.
 
 ## Design source
 
-The visual system is the Claude Design canvas `Ultra Pharma.dc.html`. Copy,
-facts and information architecture come from `ultrapharma-docs/`. Where the two
-disagree, and why, is recorded in [DESIGN-SOURCE.md](DESIGN-SOURCE.md).
+The current refinement brief and execution plan are in [REVAMP_PLAN.md](REVAMP_PLAN.md).
+It preserves the pill navigation, rounded panels, tinted neutrals and extensive
+animation while refining the UI across every route. The baseline audit,
+component specification and setup record are linked from that plan. Current changes,
+validation evidence and launch dependencies are in [the implementation record](docs/revamp/IMPLEMENTATION.md).
+
+The current implementation follows the refinement brief in `REVAMP_PLAN.md`.
+`DESIGN-SOURCE.md` records historical decisions and the current changes. The older
+`ultrapharma-docs/` dossier remains useful for content provenance; it is not proof
+that a historical fact or an operational commitment is still current.
 
 ## Commands
 
@@ -21,7 +28,8 @@ npm run typecheck      # tsc --noEmit
 npm run lint           # eslint
 npm run lint:strings   # BPTAP naming, deleted claims, dead links, em dashes
 npm run lint:icons     # one icon per labelled thing, enforced
-npm run storybook      # component catalogue
+npm test              # enquiry validation and API boundary tests
+npm run audit:prepare # optional local axe instrumentation
 ```
 
 `lint:strings` is the guard that matters most. It fails on the two incorrect
@@ -52,10 +60,12 @@ scripts/      check-strings
 
 ## Content
 
-Nothing is hardcoded in a page. To change copy, edit the file in `content/`.
+Most shared copy lives in `content/`; some route-specific strings remain in page
+components. Check both when reviewing copy. There is no Storybook command in the
+current package scripts.
 
 - `content/site.ts` navigation, contact channels, footer
-- `content/media.ts` every photograph, with credit and alt text. There is one
+- `content/media.ts` legacy media inventory; no photography is currently rendered
 - `content/pathway.ts` the four stages
 - `content/entries.ts` the six numbered entries
 - `content/services.ts` the services page
@@ -81,21 +91,22 @@ Nothing is hardcoded in a page. To change copy, edit the file in `content/`.
 
 Blocking items from `01 §7`, still with the client:
 
-1. Is there a published applicant pathway for submitting to BPTAP?
-2. Team names, credentials, photographs and LinkedIn. `content/team.ts` still
-   carries fabricated demo names and credentials, to be replaced before launch.
-   The portraits are already gone: the Proof block uses the monogram treatment.
-3. Real case outcomes. The section does not render while there are none.
-4. A street address beyond "Nairobi, Kenya".
+1. Confirm the enquiry inbox, SMTP configuration and actual retention/deletion process.
+2. Confirm any additional team members, credentials and case outcomes. Only records
+   explicitly marked verified render; presentation fixtures are excluded.
+3. Review editorial publication dates, service commitments and legal copy with the operator.
+4. Use city-level location until a publishable street address is provided.
+
+BPTAP now publishes an intervention-proposal form. The service page and relevant
+article link to the official source without promising a listing/funding outcome.
 
 ## Imagery
 
-The site carries one photograph, the firm's own hero asset. The stock
-photography that filled the other canvas slots was removed at the client's
-request; those slots are now drawn from the system's own materials rather than
-filled with a picture. `FigurePlate` is the primitive, `FundsDiagram` and
-`InsightPlate` the two specialisations. The reasoning, slot by slot, is in
-[DESIGN-SOURCE.md](DESIGN-SOURCE.md).
+The site renders no generic photography, including in the hero. The hero uses the
+actual four-stage product pathway. Articles lead with category, a small concept
+mark, title, summary and publication details, with no reserved cover/image area.
+Icons are selective: useful concept marks and functional controls, not oversized
+watermarks or an icon on every text row. Archived image files are not rendered.
 
 No image is loaded from a remote host, and `next.config.ts` allows none. To add
 the firm's own photography, add an entry to `content/media.ts` and point a slot
@@ -107,3 +118,14 @@ Light is the default theme. Dark is a deliberate choice made with the toggle.
 
 Copy `.env.example` to `.env.local` and fill in the SMTP values for the contact
 form.
+
+For isolated local testing, `node scripts/dev-smtp.mjs` starts a loopback-only
+SMTP sink on port 1025; `--reject` exercises delivery failure. It never relays mail.
+Set `SMTP_HOST=127.0.0.1`, `SMTP_PORT=1025`, `SMTP_SECURE=false`,
+`EMAIL_FROM=site@example.test` and `CONTACT_INBOX=sink@example.test` for that process.
+The default UI renders without credentials and reports service unavailability
+honestly. Never use production credentials for routine UI checks.
+
+`npm run audit:prepare` generates ignored `public/__audit.js`. Start the dev server
+with `UI_AUDIT=1` to collect local axe results in `#ui-audit-results`. The runner
+temporarily settles reveal styles while scanning. It is not loaded in production.

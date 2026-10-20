@@ -1,255 +1,294 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type FormEvent } from "react";
-import { CheckCircle, CircleNotch, PaperPlaneTilt, WarningCircle } from "@phosphor-icons/react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { site } from "@/content/site";
-
-type Status = "idle" | "submitting" | "error" | "sent";
-
-const needOptions = [
-  "Registration & PPB Submissions",
-  "Market Entry & Regional Expansion",
-  "Reimbursement & HTA (SHA / BPTAP)",
-  "Quality & Compliance Audits",
-  "General Advisory or Rapid Response",
-] as const;
-
-const emptyForm = {
-  name: "",
-  organisation: "",
-  email: "",
-  phone: "",
-  need: needOptions[0] as string,
-  message: "",
-};
-
-type FormValues = typeof emptyForm;
+import {
+  emptyContact,
+  limits,
+  needOptions,
+  validateContact,
+  type ContactErrors,
+  type ContactValues,
+} from "@/lib/contact";
 
 export function ContactForm() {
-  const [values, setValues] = useState<FormValues>(emptyForm);
-  const [status, setStatus] = useState<Status>("idle");
+  const prefix = useId();
+  const [values, setValues] = useState<ContactValues>({ ...emptyContact });
+  const [errors, setErrors] = useState<ContactErrors>({});
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "error" | "sent"
+  >("idle");
   const [attempts, setAttempts] = useState(0);
-
-  const set = <K extends keyof FormValues>(key: K, value: FormValues[K]) =>
-    setValues((previous) => ({ ...previous, [key]: value }));
-
+  const summary = useRef<HTMLDivElement>(null);
+  const sent = useRef<HTMLDivElement>(null);
+  const first = useRef<HTMLInputElement>(null);
+  const pending = useRef(false);
+  const controller = useRef<AbortController | null>(null);
+  const honey = useRef<HTMLInputElement>(null);
+  useEffect(() => () => controller.current?.abort(), []);
+  useEffect(() => {
+    if (status === "sent") sent.current?.focus();
+    else if (status === "error") summary.current?.focus();
+  }, [status]);
+  const set = (key: keyof ContactValues, value: string) => {
+    setValues((old) => ({ ...old, [key]: value }));
+    setErrors((old) => ({ ...old, [key]: undefined }));
+  };
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (pending.current) return;
+    const validation = validateContact(values);
+    if (!validation.values) {
+      setErrors(validation.errors);
+      setStatus("error");
+      requestAnimationFrame(() => summary.current?.focus());
+      return;
+    }
+    pending.current = true;
+    setErrors({});
     setStatus("submitting");
-
+    controller.current = new AbortController();
+    const timeout = setTimeout(() => controller.current?.abort(), 20000);
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          ...validation.values,
+          website: honey.current?.value ?? "",
+        }),
+        signal: controller.current.signal,
       });
-
-      if (!response.ok) throw new Error("Request failed");
-
+      const result = await response.json();
+      if (!response.ok || result.ok !== true) {
+        if (result.fields) setErrors(result.fields);
+        throw new Error("Send failed");
+      }
       setStatus("sent");
       setAttempts(0);
     } catch {
       setStatus("error");
-      setAttempts((count) => count + 1);
+      setAttempts((old) => old + 1);
+    } finally {
+      clearTimeout(timeout);
+      pending.current = false;
     }
   }
-
-  if (status === "sent") {
+  if (status === "sent")
     return (
       <div
+        ref={sent}
+        tabIndex={-1}
         data-slot="contact-success"
-        className="flex min-h-[420px] flex-col items-center justify-center gap-4 text-center p-6"
+        className="py-10 outline-none"
+        role="status"
       >
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-stamp-wash text-stamp-600 border border-stamp-500/20">
-          <CheckCircle size={32} weight="duotone" aria-hidden />
-        </div>
-        <h3 className="m-0 font-display text-2xl font-medium text-ink-900">
-          Message received
-        </h3>
-        <p className="m-0 max-w-[36ch] text-ink-500 text-sm leading-relaxed">
-          Thank you for reaching out. A regulatory lead will reply within one working day.
+        <span className="stamp-pill">Enquiry sent</span>
+        <h3 className="t-h3 mb-4 mt-7">Thank you for getting in touch.</h3>
+        <p className="text-ink-700">
+          Your enquiry was accepted for sending. If the matter is
+          time-sensitive, you can also contact us directly at{" "}
+          <Link href={`mailto:${site.email}`} className="underline">
+            {site.email}
+          </Link>
+          .
         </p>
         <button
           type="button"
-          className="btn btn-secondary btn-sm mt-4 cursor-pointer"
+          className="btn btn-secondary mt-6"
           onClick={() => {
-            setValues(emptyForm);
+            setValues({ ...emptyContact });
+            setErrors({});
             setStatus("idle");
+            requestAnimationFrame(() => first.current?.focus());
           }}
         >
           Send another enquiry
         </button>
       </div>
     );
-  }
-
+  const field = (
+    key: "name" | "organisation" | "email" | "phone",
+    label: string,
+    autoComplete: string,
+    required = false,
+    type = "text",
+  ) => (
+    <div>
+      <label htmlFor={`${prefix}-${key}`} className="field-label">
+        {label}
+        {!required && (
+          <span className="font-normal text-ink-500"> (optional)</span>
+        )}
+      </label>
+      <input
+        ref={key === "name" ? first : undefined}
+        id={`${prefix}-${key}`}
+        name={key}
+        type={type}
+        autoComplete={autoComplete}
+        required={required}
+        maxLength={limits[key]}
+        className="field"
+        value={values[key]}
+        onChange={(event) => set(key, event.target.value)}
+        aria-invalid={Boolean(errors[key]) || undefined}
+        aria-describedby={errors[key] ? `${prefix}-${key}-error` : undefined}
+      />
+      {errors[key] && (
+        <p id={`${prefix}-${key}-error`} className="field-error">
+          {errors[key]}
+        </p>
+      )}
+    </div>
+  );
   return (
     <form
       onSubmit={onSubmit}
+      noValidate
       aria-busy={status === "submitting"}
-      className="flex flex-col gap-6"
-      noValidate={false}
+      className="space-y-6"
     >
+      <p className="m-0 text-sm text-ink-500">
+        Name, email and enquiry are required.
+      </p>
       {status === "error" && (
-        <div
-          role="alert"
-          className="flex items-start gap-3 rounded-xl border border-signal-blocked/40 bg-signal-blocked/10 p-4 text-ink-900"
-        >
-          <WarningCircle size={20} weight="duotone" className="mt-0.5 shrink-0 text-signal-blocked" aria-hidden />
-          <p className="t-body-sm m-0 text-xs leading-relaxed">
-            Message could not be sent. All entered details are preserved.{" "}
-            {attempts >= 2 ? (
+        <div ref={summary} tabIndex={-1} role="alert" className="form-notice">
+          <p className="m-0 font-medium">
+            {Object.values(errors).some(Boolean)
+              ? "Please check the details below."
+              : "Your enquiry could not be sent."}
+          </p>
+          <p className="mb-0 mt-2">
+            {Object.values(errors).some(Boolean)
+              ? "Correct the marked fields and try again."
+              : "Your details have been kept. Please try again."}
+            {attempts >= 2 && (
               <>
-                Please email us directly at{" "}
-                <Link href={`mailto:${site.email}`} className="font-medium underline">
+                {" "}
+                You can also email{" "}
+                <Link href={`mailto:${site.email}`} className="underline">
                   {site.email}
                 </Link>
                 .
               </>
-            ) : (
-              "Please try again."
             )}
           </p>
+          {Object.entries(errors).some(([, value]) => value) && (
+            <ul className="mb-0 mt-3 list-disc pl-5">
+              {Object.entries(errors)
+                .filter(([, value]) => value)
+                .map(([key, message]) => (
+                  <li key={key}>
+                    <a
+                      href={`#${prefix}-${key}`}
+                      onClick={(event) => {
+                        event.preventDefault();
+                        document.getElementById(`${prefix}-${key}`)?.focus();
+                      }}
+                      className="underline"
+                    >
+                      {message}
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          )}
         </div>
       )}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <Field
-          id="name"
-          label="Your Name"
-          required
-          placeholder="e.g. Dr. Sarah Kimani"
-          value={values.name}
-          onChange={(value) => set("name", value)}
-        />
-        <Field
-          id="organisation"
-          label="Organisation"
-          placeholder="e.g. Apex Therapeutics"
-          value={values.organisation}
-          onChange={(value) => set("organisation", value)}
-        />
-        <Field
-          id="email"
-          label="Work Email"
-          type="email"
-          required
-          placeholder="sarah@company.com"
-          value={values.email}
-          onChange={(value) => set("email", value)}
-        />
-        <Field
-          id="phone"
-          label="Phone Number"
-          type="tel"
-          placeholder="+254 700 000 000"
-          value={values.phone}
-          onChange={(value) => set("phone", value)}
-        />
-      </div>
-
-      <label htmlFor="need" className="flex flex-col gap-2">
-        <span className="t-label text-ink-500 text-xs uppercase tracking-wider">Primary Need</span>
-        <select
-          id="need"
-          name="need"
-          className="field cursor-pointer font-normal text-[0.9375rem] text-ink-900 bg-paper transition-all focus:border-stamp-600"
-          value={values.need}
-          onChange={(event) => set("need", event.target.value)}
-        >
-          {needOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-      </label>
-
-      <label htmlFor="message" className="flex flex-col gap-2">
-        <span className="t-label text-ink-500 text-xs uppercase tracking-wider">Project Context</span>
-        <textarea
-          id="message"
-          name="message"
-          rows={4}
-          required
-          placeholder="Tell us about the product, timeline, or current regulatory stage..."
-          className="field text-[0.9375rem] text-ink-900 transition-all focus:border-stamp-600"
-          value={values.message}
-          onChange={(event) => set("message", event.target.value)}
-        />
-      </label>
-
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-2">
-        <button
-          type="submit"
-          disabled={status === "submitting"}
-          className="btn btn-primary group cursor-pointer w-full md:w-auto"
-        >
-          {status === "submitting" ? (
-            <>
-              <CircleNotch size={18} className="animate-spin" aria-hidden />
-              <span>Sending enquiry...</span>
-            </>
-          ) : (
-            <>
-              <span>Send enquiry</span>
-              {/* The one send button on the site, so it gets the send glyph
-                  rather than the arrow every other control carries. */}
-              <PaperPlaneTilt
-                size={16}
-                weight="bold"
-                className="transition-transform duration-200 group-hover:translate-x-1"
-                aria-hidden
-              />
-            </>
+      <fieldset
+        disabled={status === "submitting"}
+        className="m-0 space-y-6 border-0 p-0"
+      >
+        <legend className="sr-only">Enquiry details</legend>
+        <div className="grid gap-6 md:grid-cols-2">
+          {field("name", "Your name", "name", true)}
+          {field("organisation", "Organisation", "organization")}
+          {field("email", "Email address", "email", true, "email")}
+          {field("phone", "Phone number", "tel", false, "tel")}
+        </div>
+        <div>
+          <label htmlFor={`${prefix}-need`} className="field-label">
+            What do you need help with?
+          </label>
+          <select
+            id={`${prefix}-need`}
+            name="need"
+            className="field"
+            value={values.need}
+            onChange={(event) => set("need", event.target.value)}
+            aria-invalid={Boolean(errors.need) || undefined}
+            aria-describedby={errors.need ? `${prefix}-need-error` : undefined}
+          >
+            {needOptions.map((option) => (
+              <option key={option}>{option}</option>
+            ))}
+          </select>
+          {errors.need && (
+            <p id={`${prefix}-need-error`} className="field-error">
+              {errors.need}
+            </p>
           )}
-        </button>
-
-        <p className="t-index m-0 text-xs text-ink-400 font-light">
-          Kept for 12 months, then deleted.{" "}
-          <Link href="/legal/privacy" className="text-ink-500 underline hover:text-ink-900">
-            Privacy policy
+        </div>
+        <div>
+          <label htmlFor={`${prefix}-message`} className="field-label">
+            Your enquiry
+          </label>
+          <textarea
+            id={`${prefix}-message`}
+            name="message"
+            className="field"
+            rows={5}
+            maxLength={limits.message}
+            required
+            value={values.message}
+            onChange={(event) => set("message", event.target.value)}
+            aria-invalid={Boolean(errors.message) || undefined}
+            aria-describedby={`${prefix}-message-help${errors.message ? ` ${prefix}-message-error` : ""}`}
+          />
+          <p
+            id={`${prefix}-message-help`}
+            className="mb-0 mt-2 text-sm text-ink-500"
+          >
+            A short outline of the product, current stage and support you need.
+            Please keep confidential files for a later conversation.
+          </p>
+          {errors.message && (
+            <p id={`${prefix}-message-error`} className="field-error">
+              {errors.message}
+            </p>
+          )}
+        </div>
+        <div className="absolute -left-[10000px]" aria-hidden>
+          <label htmlFor={`${prefix}-website`}>Leave this field empty</label>
+          <input
+            ref={honey}
+            id={`${prefix}-website`}
+            name="website"
+            autoComplete="off"
+            tabIndex={-1}
+          />
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-5 border-t border-rule pt-6">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={status === "submitting"}
+          >
+            {status === "submitting" ? "Sending enquiry..." : "Send enquiry"}
+          </button>
+          <Link
+            href="/legal/privacy"
+            className="text-sm text-ink-500 underline"
+          >
+            How we handle your information
           </Link>
-        </p>
-      </div>
-    </form>
-  );
-}
-
-function Field({
-  id,
-  label,
-  value,
-  onChange,
-  type = "text",
-  required = false,
-  placeholder,
-}: {
-  readonly id: string;
-  readonly label: string;
-  readonly value: string;
-  readonly onChange: (value: string) => void;
-  readonly type?: "text" | "email" | "tel";
-  readonly required?: boolean;
-  readonly placeholder?: string;
-}) {
-  return (
-    <label htmlFor={id} className="flex flex-col gap-2">
-      <span className="t-label text-ink-500 text-xs uppercase tracking-wider">
-        {label}
-        {required && <span className="text-stamp-600 ml-0.5">*</span>}
+        </div>
+      </fieldset>
+      <span role="status" className="sr-only">
+        {status === "submitting" ? "Sending your enquiry. Please wait." : ""}
       </span>
-      <input
-        id={id}
-        name={id}
-        type={type}
-        required={required}
-        placeholder={placeholder}
-        className="field text-[0.9375rem] text-ink-900 placeholder:text-ink-300 transition-all focus:border-stamp-600"
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-      />
-    </label>
+    </form>
   );
 }

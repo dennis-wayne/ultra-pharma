@@ -1,0 +1,232 @@
+[
+  {
+    "path": "/",
+    "theme": "light",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [],
+    "passes": 28
+  },
+  {
+    "path": "/services",
+    "theme": "light",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [],
+    "passes": 23,
+    "overflow": false
+  },
+  {
+    "path": "/services/reimbursement",
+    "theme": "light",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [],
+    "passes": 26,
+    "overflow": false
+  },
+  {
+    "path": "/practice",
+    "theme": "light",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [],
+    "passes": 23,
+    "overflow": false
+  },
+  {
+    "path": "/insights",
+    "theme": "light",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [],
+    "passes": 23,
+    "overflow": false
+  },
+  {
+    "path": "/contact",
+    "theme": "light",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [],
+    "passes": 28,
+    "overflow": false
+  },
+  {
+    "path": "/legal/privacy",
+    "theme": "light",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [],
+    "passes": 23,
+    "overflow": false
+  },
+  {
+    "path": "/legal/terms",
+    "theme": "light",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [],
+    "passes": 23,
+    "overflow": false
+  },
+  {
+    "path": "/insights/sha-benefits-package-registered-product",
+    "theme": "light",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [],
+    "passes": 25,
+    "overflow": false
+  },
+  {
+    "path": "/insights/reading-the-bptap-mandate",
+    "theme": "light",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [],
+    "passes": 26,
+    "overflow": false
+  },
+  {
+    "path": "/insights/what-drives-a-ppb-review-timeline",
+    "theme": "light",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [],
+    "passes": 25,
+    "overflow": false
+  },
+  {
+    "path": "/insights/eac-harmonisation-and-the-second-market",
+    "theme": "light",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [],
+    "passes": 25,
+    "overflow": false
+  },
+  {
+    "path": "/",
+    "theme": "dark",
+    "width": 390,
+    "violations": [],
+    "incomplete": [],
+    "passes": 28
+  },
+  {
+    "path": "/services",
+    "theme": "dark",
+    "width": 390,
+    "violations": [],
+    "incomplete": [],
+    "passes": 23,
+    "overflow": false
+  },
+  {
+    "path": "/services/reimbursement",
+    "theme": "dark",
+    "width": 390,
+    "violations": [],
+    "incomplete": [],
+    "passes": 26,
+    "overflow": false
+  },
+  {
+    "path": "/practice",
+    "theme": "dark",
+    "width": 390,
+    "violations": [],
+    "incomplete": [],
+    "passes": 23,
+    "overflow": false
+  },
+  {
+    "path": "/insights",
+    "theme": "dark",
+    "width": 390,
+    "violations": [],
+    "incomplete": [],
+    "passes": 23,
+    "overflow": false
+  },
+  {
+    "path": "/contact",
+    "theme": "dark",
+    "width": 390,
+    "violations": [],
+    "incomplete": [],
+    "passes": 28,
+    "overflow": false
+  },
+  {
+    "path": "/legal/privacy",
+    "theme": "dark",
+    "width": 390,
+    "violations": [],
+    "incomplete": [],
+    "passes": 23,
+    "overflow": false
+  },
+  {
+    "path": "/legal/terms",
+    "theme": "dark",
+    "width": 390,
+    "violations": [],
+    "incomplete": [],
+    "passes": 23,
+    "overflow": false
+  },
+  {
+    "path": "/insights/sha-benefits-package-registered-product",
+    "theme": "dark",
+    "width": 390,
+    "violations": [],
+    "incomplete": [],
+    "passes": 25,
+    "overflow": false
+  },
+  {
+    "path": "/insights/reading-the-bptap-mandate",
+    "theme": "dark",
+    "width": 390,
+    "violations": [],
+    "incomplete": [],
+    "passes": 26,
+    "overflow": false
+  },
+  {
+    "path": "/insights/what-drives-a-ppb-review-timeline",
+    "theme": "dark",
+    "width": 390,
+    "violations": [],
+    "incomplete": [],
+    "passes": 25,
+    "overflow": false
+  },
+  {
+    "path": "/insights/eac-harmonisation-and-the-second-market",
+    "theme": "dark",
+    "width": 390,
+    "violations": [],
+    "incomplete": [],
+    "passes": 25,
+    "overflow": false
+  },
+  {
+    "path": "/",
+    "theme": "light",
+    "width": 390,
+    "violations": [],
+    "incomplete": [],
+    "passes": 28
+  },
+  {
+    "path": "/",
+    "theme": "dark",
+    "width": 1440,
+    "violations": [],
+    "incomplete": [],
+    "passes": 28
+  }
+]

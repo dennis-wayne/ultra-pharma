@@ -21,7 +21,15 @@ const widthClass = {
  * index so `IndexRail` can track it without a second source of truth.
  */
 export const Section = forwardRef<HTMLElement, SectionProps>(function Section(
-  { index, children, width = "page", tone = "paper", bordered = false, className, ...props },
+  {
+    index,
+    children,
+    width = "page",
+    tone = "paper",
+    bordered = false,
+    className,
+    ...props
+  },
   ref,
 ) {
   return (
@@ -38,7 +46,14 @@ export const Section = forwardRef<HTMLElement, SectionProps>(function Section(
       )}
       {...props}
     >
-      <div className={cn("mx-auto px-6 py-20 md:py-32", widthClass[width])}>{children}</div>
+      <div
+        className={cn(
+          "shell section-space",
+          width === "text" && widthClass.text,
+        )}
+      >
+        {children}
+      </div>
     </section>
   );
 });
@@ -62,14 +77,21 @@ export function SectionIndex({
   className,
 }: SectionIndexProps) {
   return (
-    <div
-      data-slot="section-index"
-      className={cn("flex items-baseline gap-4", className)}
-    >
-      <span className={cn("t-index", tone === "deep" ? "text-deep-stamp" : "text-stamp-700")}>
+    <div data-slot="section-index" className={cn("section-label", className)}>
+      <span
+        className={cn(
+          "t-index",
+          tone === "deep" ? "text-deep-ink-soft" : "text-ink-400",
+        )}
+      >
         {index}
       </span>
-      <span className={cn("t-label", tone === "deep" ? "text-deep-ink-soft" : "text-ink-500")}>
+      <span
+        className={cn(
+          "t-label",
+          tone === "deep" ? "text-deep-ink-soft" : "text-ink-500",
+        )}
+      >
         {label}
       </span>
     </div>

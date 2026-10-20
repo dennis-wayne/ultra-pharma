@@ -4,7 +4,6 @@ import { Source_Serif_4, Nunito, IBM_Plex_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/structure/site-header";
 import { SiteFooter } from "@/components/structure/site-footer";
-import { MotionProvider } from "@/components/motion/motion-provider";
 import { organizationSchema } from "@/lib/schema";
 import { site } from "@/content/site";
 
@@ -19,7 +18,7 @@ const sourceSerif = Source_Serif_4({
 
 const nunito = Nunito({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500"],
   style: ["normal"],
   variable: "--font-nunito",
   display: "swap",
@@ -27,7 +26,7 @@ const nunito = Nunito({
 
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["400", "500"],
   style: ["normal"],
   variable: "--font-plex-mono",
   display: "swap",
@@ -51,27 +50,19 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${sourceSerif.variable} ${nunito.variable} ${plexMono.variable}`}
     >
-      <head>
-        {/*
-          Runs before paint. Only then does CSS hide the pre-animation state, so
-          a visitor without scripting, or with reduced motion set, sees the page
-          at its end state rather than a blank one.
-        */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('motion-ready')}}catch(e){}})()`,
-          }}
-        />
-      </head>
       <body>
-        <MotionProvider />
         {/*
           Light is the default. The palette, the paper grounds and the graded
           plates are all authored light-first, so a first visit lands there
@@ -93,8 +84,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </ThemeProvider>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
         />
+        {process.env.NODE_ENV === "development" &&
+          process.env.UI_AUDIT === "1" && <script defer src="/__audit.js" />}
       </body>
     </html>
   );

@@ -1,5 +1,25 @@
 # Design source of truth
 
+## Current refinement, 20 October 2026
+
+The current user brief and `REVAMP_PLAN.md` supersede historical canvas decisions
+where they conflict. Pills, rounded panels, tinted neutrals and rich motion stay.
+The hero image is no longer rendered. Its place is taken by the real four-stage
+pathway, presented as an animated layered document. Selective concept icons remain
+on the six practice entries and a few service/principle/editorial surfaces; repeated
+row icons and oversized watermarks are removed. Article cover blocks are removed
+entirely, with category, title, summary and publication details carrying the card.
+Service stages and the six practice entries now use asymmetric bento compositions.
+Headings use context-specific widths; the hero groups its two statements explicitly.
+Buttons retain 44px targets with tighter type and padding. Native scrolling uses
+cached section geometry, a shared entrance observer and no scroll-time blur.
+
+Only verified team records render publicly. Demo people remain as private content
+fixtures. BPTAP procedural wording was revised after checking its published
+intervention-proposal channel; proposing an intervention is not a promised listing
+or funding decision. Detailed evidence and remaining operational gates are recorded
+under `docs/revamp/`.
+
 The implementation follows the Claude Design canvas:
 
 - Project: `Ultrapharma Website Revamp` (`7c529bad-62f9-4fdc-a034-1d8c62ce0ddb`)

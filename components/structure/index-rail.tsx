@@ -1,71 +1,75 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export type IndexRailProps = {
-  /** Section index numbers, in document order. */
   readonly sections: readonly string[];
-  /**
-   * The id prefix each section's anchor uses. Defaults to "sec", matching
-   * `Section`'s own `id={sec-${index}}`. `/services` reuses `stage-XX` ids
-   * instead, since other pages already link to `/services#stage-01`.
-   */
   readonly idPrefix?: string;
 };
 
-/**
- * The sticky numbered rail. Decorative in the accessibility tree: section
- * numbers are announced as part of each heading block instead, so a screen
- * reader user gets the structure without a duplicated navigation list.
- *
- * Below `lg` it collapses to the progress bar under the header.
- */
 export function IndexRail({ sections, idPrefix = "sec" }: IndexRailProps) {
   const [active, setActive] = useState(sections[0] ?? "");
-
+  const progress = useRef<HTMLDivElement>(null);
+  const key = sections.join(",");
   useEffect(() => {
-    const onScroll = () => {
-      const nodes = Array.from(document.querySelectorAll<HTMLElement>("[data-sec]"));
-      let current = "";
-      for (const node of nodes) {
-        if (node.getBoundingClientRect().top <= 140) {
-          current = node.dataset.sec ?? current;
-        }
-      }
-      if (current) setActive(current);
+    const ids = key.split(",");
+    let frame = 0;
+    let positions: Array<{ id: string; top: number }> = [];
+    let max = 0;
+    let previous = "";
+    const measure = () => {
+      positions = ids.flatMap((id) => {
+        const node = document.getElementById(`${idPrefix}-${id}`);
+        return node
+          ? [{ id, top: node.getBoundingClientRect().top + window.scrollY }]
+          : [];
+      });
+      max = document.documentElement.scrollHeight - innerHeight;
+      queue();
     };
-
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
+    const update = () => {
+      frame = 0;
+      let current = ids[0] ?? "";
+      for (const section of positions) {
+        if (section.top <= window.scrollY + 170) current = section.id;
+      }
+      if (current !== previous) {
+        previous = current;
+        setActive(current);
+      }
+      if (progress.current)
+        progress.current.style.transform = `scaleX(${max > 0 ? Math.min(1, window.scrollY / max) : 0})`;
+    };
+    const queue = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    const resize = new ResizeObserver(measure);
+    resize.observe(document.body);
+    measure();
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", measure);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", queue);
+      window.removeEventListener("resize", measure);
+      resize.disconnect();
+    };
+  }, [key, idPrefix]);
   return (
-    <nav
-      aria-hidden
-      data-slot="index-rail"
-      className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 flex-col gap-2.5 lg:flex"
-    >
-      {sections.map((n) => {
-        const on = n === active;
-        return (
+    <>
+      <nav aria-label="On this page" className="section-rail">
+        {sections.map((n) => (
           <a
             key={n}
             href={`#${idPrefix}-${n}`}
-            tabIndex={-1}
-            className="t-index flex items-center gap-2.5 text-ink-400 no-underline transition-colors hover:text-ink-900"
+            aria-label={`Go to section ${n}`}
+            aria-current={n === active ? "location" : undefined}
           >
-            <span
-              className="block w-[3px] rounded-sm transition-colors"
-              style={{
-                height: 18,
-                background: on ? "var(--stamp-600)" : "var(--rule-strong)",
-              }}
-            />
-            <span>{n}</span>
+            {n}
           </a>
-        );
-      })}
-    </nav>
+        ))}
+      </nav>
+      <div ref={progress} className="mobile-progress" aria-hidden />
+    </>
   );
 }

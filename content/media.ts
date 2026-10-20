@@ -29,7 +29,8 @@ export type Media = {
 export const media = {
   hero: {
     slot: "up-hero",
-    brief: "P1 · FACILITY : wide shot, sterile filling line or QC laboratory, unposed",
+    brief:
+      "P1 · FACILITY : wide shot, sterile filling line or QC laboratory, unposed",
     src: "/hero-bg.jpg",
     alt: "Ultra Pharma laboratory and regulatory operations in Kenya.",
     width: 4252,

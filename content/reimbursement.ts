@@ -18,7 +18,7 @@ export const facts: readonly Fact[] = [
   { key: "Body", value: "Benefits Package and Tariffs Advisory Panel" },
   { key: "Gazetted", value: "Notice No. 5044, 23 April 2025" },
   { key: "Inaugurated", value: "26 May 2025" },
-  { key: "Chair", value: "Prof. Walter Jaoko" },
+  { key: "Chair at inauguration", value: "Prof. Walter Jaoko" },
   { key: "Secretariat", value: "CEMA, University of Nairobi" },
   { key: "Method", value: "Health technology assessment" },
 ];
@@ -66,13 +66,39 @@ export type EvidenceItem = {
 };
 
 export const evidence: readonly EvidenceItem[] = [
-  { n: "01", requirement: "Clinical effectiveness against a comparator in current Kenyan practice", icon: "clinicalEffectiveness" },
-  { n: "02", requirement: "Safety profile and adverse-event data", icon: "safety" },
-  { n: "03", requirement: "Incremental cost-effectiveness analysis with local cost inputs", icon: "costEffectiveness" },
-  { n: "04", requirement: "Budget-impact model against the relevant fund", icon: "budgetImpact" },
-  { n: "05", requirement: "Local epidemiological and disease-burden data", icon: "epidemiology" },
+  {
+    n: "01",
+    requirement:
+      "Clinical effectiveness against a comparator in current Kenyan practice",
+    icon: "clinicalEffectiveness",
+  },
+  {
+    n: "02",
+    requirement: "Safety profile and adverse-event data",
+    icon: "safety",
+  },
+  {
+    n: "03",
+    requirement:
+      "Incremental cost-effectiveness analysis with local cost inputs",
+    icon: "costEffectiveness",
+  },
+  {
+    n: "04",
+    requirement: "Budget-impact model against the relevant fund",
+    icon: "budgetImpact",
+  },
+  {
+    n: "05",
+    requirement: "Local epidemiological and disease-burden data",
+    icon: "epidemiology",
+  },
   { n: "06", requirement: "Equity and access considerations", icon: "equity" },
-  { n: "07", requirement: "Implementation feasibility within existing service delivery", icon: "implementation" },
+  {
+    n: "07",
+    requirement: "Implementation feasibility within existing service delivery",
+    icon: "implementation",
+  },
 ];
 
 export type Phase = {
@@ -90,7 +116,8 @@ export const phases: readonly Phase[] = [
     icon: "feasibility",
     description:
       "We establish whether the evidence base supports a submission, and what is missing.",
-    deliverable: "Deliverable: a feasibility opinion and evidence gap register.",
+    deliverable:
+      "Deliverable: a feasibility opinion and evidence gap register.",
   },
   {
     n: "Phase 2",

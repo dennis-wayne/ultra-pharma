@@ -10,8 +10,8 @@ export const DUR = {
 } as const;
 
 /** The CSS `--ease-out` curve, as GSAP understands it. */
-export const EASE_OUT = "cubic-bezier(0.16, 1, 0.3, 1)";
-export const EASE_STANDARD = "cubic-bezier(0.2, 0, 0, 1)";
+export const EASE_OUT = "power3.out";
+export const EASE_STANDARD = "power2.inOut";
 
 /** 60ms between children, capped at six, per `03 §5`. */
 export const STAGGER = { each: 0.06, from: "start" as const };
