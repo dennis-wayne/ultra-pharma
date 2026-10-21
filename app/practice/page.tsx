@@ -11,6 +11,7 @@ import { publicTeam } from "@/content/team";
 import { breadcrumbSchema } from "@/lib/schema";
 import { Mark } from "@/components/primitives/mark";
 import type { IconName } from "@/lib/icons";
+import { DossierIllustration } from "@/components/content/regulatory-art";
 export const metadata: Metadata = {
   title: "Practice",
   description:
@@ -44,25 +45,25 @@ const principles: readonly {
     title: "Queries with a response",
     icon: "analysedQueries",
     description:
-      "Regulatory questions are analysed alongside recommended actions and draft responses, giving you a clear next step.",
+      "When a regulator raises a question, we help your team understand it, agree the action and prepare a response.",
   },
   {
     title: "Accountable named leads",
     icon: "namedLead",
     description:
-      "A named point of contact coordinates the work, the document register and communication through the engagement.",
+      "You have a named person to speak to about the work, the document register and any questions along the way.",
   },
   {
     title: "Evidence alongside approval",
     icon: "financingSynergy",
     description:
-      "The evidence for reimbursement is considered alongside the registration strategy, keeping access questions visible.",
+      "We consider reimbursement evidence alongside registration, so access questions are part of the plan early on.",
   },
   {
     title: "A regional perspective",
     icon: "regionalHarmonisation",
     description:
-      "Dossiers are structured with local requirements and regional harmonisation in mind, while checking what each market requires.",
+      "We structure the dossier so you can reuse the work, then check what needs to change for each market.",
   },
 ];
 export default function PracticePage() {
@@ -73,8 +74,8 @@ export default function PracticePage() {
       />
       <IndexRail sections={["01", "02", "03", "04"]} />
       <PageHeader
-        title="The practice"
-        description="Careful dossiers. Clear communication. An in-country perspective on the decisions that move healthcare products forward."
+        title="How we work"
+        description="We start with your product and the evidence you already have. Then we agree the gaps to close, who is responsible and how to keep the work moving."
       />
       <Section index="01" bordered>
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
@@ -90,6 +91,7 @@ export default function PracticePage() {
               <br />
               One coherent dossier.
             </h2>
+            <DossierIllustration />
             <ol className="m-0 list-none p-0">
               {modules.map((name, i) => (
                 <li
@@ -102,19 +104,19 @@ export default function PracticePage() {
               ))}
             </ol>
             <p className="mb-0 mt-5 text-sm text-ink-500">
-              From gap analysis to a filing plan.
+              A coherent filing plan begins with a complete evidence review.
             </p>
           </Reveal>
           <div>
             <Reveal>
               <SectionIndex index="01" label="Methodology" />
               <h2 className="t-h2 mb-6 mt-5">
-                Dossiers, deadlines, and technical depth
+                Start with what is in the dossier
               </h2>
               <p className="t-lede text-ink-700">
-                Every engagement begins with the evidence in hand, the gaps to
-                close, and the requirements that apply. From there, we agree a
-                filing plan and a clear register of responsibilities.
+                We review the evidence you have against the requirements that
+                apply. That gives us a practical starting point for the filing
+                plan and a clear record of who will handle each part.
               </p>
             </Reveal>
             <div className="mt-8">
@@ -132,11 +134,11 @@ export default function PracticePage() {
         <Reveal className="section-top">
           <div>
             <SectionIndex index="02" label="Principles" />
-            <h2 className="t-h2">Clarity at every step</h2>
+            <h2 className="t-h2">You should know where the work stands</h2>
           </div>
           <p>
-            The working principles behind our regulatory and market-access
-            engagements.
+            The way we handle questions, responsibilities and evidence should
+            make your next decision easier to understand.
           </p>
         </Reveal>
         <div data-reveal-group className="grid gap-6 md:grid-cols-2">
@@ -173,7 +175,7 @@ export default function PracticePage() {
           <div className="max-w-[620px]">
             <SectionIndex index="04" label="Engagement" />
             <h2 className="t-h2 mb-5 mt-5">
-              Start with a confidential dossier gap audit
+              Want to understand the gaps in your dossier?
             </h2>
             <p className="mb-0 text-ink-700">
               Tell us about the product and its current stage. We can agree a

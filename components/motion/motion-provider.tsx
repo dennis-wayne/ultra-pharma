@@ -24,19 +24,48 @@ export function MotionProvider() {
             clearProps: "transform,opacity",
           },
         );
-        gsap.fromTo(
-          "[data-hero-stages] > *",
-          { opacity: 0.2, x: 14 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.6,
-            stagger: 0.07,
-            delay: 0.15,
-            ease: "power3.out",
-            clearProps: "transform,opacity",
-          },
-        );
+        const portals = document.querySelectorAll("[data-portal-intro]");
+        if (portals.length) {
+          gsap.fromTo(
+            portals,
+            { opacity: 0, y: 24 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.85,
+              stagger: 0.09,
+              delay: 0.15,
+              ease: "power3.out",
+              clearProps: "transform,opacity",
+            },
+          );
+          gsap.fromTo(
+            "[data-pathway-route]",
+            { strokeDashoffset: 1 },
+            {
+              strokeDashoffset: 0,
+              duration: 1.4,
+              delay: 0.35,
+              ease: "power2.inOut",
+            },
+          );
+        }
+        const stageLinks = document.querySelectorAll("[data-hero-stages] > *");
+        if (stageLinks.length) {
+          gsap.fromTo(
+            stageLinks,
+            { opacity: 0.2, x: 14 },
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.6,
+              stagger: 0.07,
+              delay: 0.15,
+              ease: "power3.out",
+              clearProps: "transform,opacity",
+            },
+          );
+        }
       });
       const entrances = new Map<Element, () => void>();
       const observer = new IntersectionObserver(

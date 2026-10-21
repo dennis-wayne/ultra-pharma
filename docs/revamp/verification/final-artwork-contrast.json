@@ -1,0 +1,62 @@
+[
+  {
+    "theme": "light",
+    "role": "heading",
+    "ratio": 9.11
+  },
+  {
+    "theme": "light",
+    "role": "subheading",
+    "ratio": 5.95
+  },
+  {
+    "theme": "light",
+    "role": "body",
+    "ratio": 7.24
+  },
+  {
+    "theme": "dark",
+    "role": "heading",
+    "ratio": 10.4
+  },
+  {
+    "theme": "dark",
+    "role": "subheading",
+    "ratio": 7.86
+  },
+  {
+    "theme": "dark",
+    "role": "body",
+    "ratio": 8.99
+  },
+  {
+    "theme": "light-selected",
+    "role": "heading",
+    "ratio": 15.7
+  },
+  {
+    "theme": "light-selected",
+    "role": "subheading",
+    "ratio": 11.64
+  },
+  {
+    "theme": "light-selected",
+    "role": "body",
+    "ratio": 13.44
+  },
+  {
+    "theme": "dark-selected",
+    "role": "heading",
+    "ratio": 15.71
+  },
+  {
+    "theme": "dark-selected",
+    "role": "subheading",
+    "ratio": 10.49
+  },
+  {
+    "theme": "dark-selected",
+    "role": "body",
+    "ratio": 12.98
+  }
+]

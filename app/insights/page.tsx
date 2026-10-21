@@ -22,9 +22,9 @@ export default function InsightsPage() {
       />
       <PageHeader
         title="Insights & analysis"
-        description="A closer look at healthcare regulation, health technology assessment and market access in Kenya and East Africa."
+        description="Notes on Kenyan regulation, reimbursement and regional market entry, with a focus on what they mean for your product."
       >
-        <div className="mt-8 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-ink-500">
+        <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-ink-500">
           <span>Topics:</span>
           {Array.from(new Set(insights.map((post) => post.category))).map(
             (category) => (
@@ -50,7 +50,7 @@ export default function InsightsPage() {
                 />
               </div>
               <div className="grid gap-x-16 gap-y-6 pt-8 lg:grid-cols-[1.15fr_1fr]">
-                <h2 className="t-h2 mb-5 mt-4">
+                <h2 className="t-h2 t-editorial mb-5 mt-4">
                   <Link
                     href={`/insights/${featured.slug}`}
                     className="no-underline hover:underline"

@@ -35,19 +35,19 @@ export const reimbursementServices: readonly ReimbursementService[] = [
     icon: "htaDossier",
     name: "HTA dossier development",
     description:
-      "Assembling the evidence a health technology assessment requires: clinical effectiveness against an appropriate local comparator, safety, and the value case in a form assessors can evaluate.",
+      "We bring together clinical effectiveness, safety and value evidence around an appropriate local comparator, in a form assessors can review.",
   },
   {
     icon: "economicModelling",
     name: "Cost-effectiveness and budget-impact modelling",
     description:
-      "Incremental cost-effectiveness analysis using Kenyan cost and epidemiological inputs, and a budget-impact model showing what inclusion would mean for the relevant fund over a defined horizon.",
+      "We use Kenyan cost and disease data to model cost-effectiveness, then estimate what inclusion could cost the relevant fund over an agreed period.",
   },
   {
     icon: "stakeholderEngagement",
     name: "Stakeholder engagement and SHA liaison",
     description:
-      "Structured engagement with the Ministry of Health, the Social Health Authority and the panel secretariat, sequenced so evidence arrives when it can be considered.",
+      "We help you prepare for discussions with the Ministry of Health, SHA and the panel secretariat, including what evidence needs to be ready and when.",
   },
 ];
 
@@ -115,7 +115,7 @@ export const phases: readonly Phase[] = [
     name: "Feasibility assessment",
     icon: "feasibility",
     description:
-      "We establish whether the evidence base supports a submission, and what is missing.",
+      "We review the evidence you have and identify what is still needed before a submission can be considered.",
     deliverable:
       "Deliverable: a feasibility opinion and evidence gap register.",
   },
@@ -124,14 +124,15 @@ export const phases: readonly Phase[] = [
     name: "Evidence generation",
     icon: "evidenceGeneration",
     description:
-      "Closing the gaps: comparator selection, model construction, local data sourcing.",
+      "We agree the comparator, build the model and source the local data needed to close the evidence gaps.",
     deliverable: "Deliverable: a completed economic model and dossier draft.",
   },
   {
     n: "Phase 3",
     name: "Engagement",
     icon: "engagement",
-    description: "Structured stakeholder engagement and submission support.",
+    description:
+      "We help you prepare the dossier and support the agreed discussions and submission process.",
     deliverable: "Deliverable: a final dossier and an engagement record.",
   },
   {
@@ -139,6 +140,6 @@ export const phases: readonly Phase[] = [
     name: "Follow-through",
     icon: "followThrough",
     description:
-      "Responding to questions and supporting the review process to determination.",
+      "We help you answer questions and keep the evidence in order while the review continues.",
   },
 ];

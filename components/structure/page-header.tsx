@@ -14,7 +14,7 @@ export function PageHeader({
 }) {
   return (
     <header className="page-header">
-      <div className="shell text-center" data-hero>
+      <div className="shell" data-hero>
         <nav aria-label="Breadcrumb" className="breadcrumb">
           <Link href="/">Ultra Pharma</Link>
           <span aria-hidden>/</span>
@@ -26,9 +26,11 @@ export function PageHeader({
           )}
           <span>{parent ? "Reimbursement" : title}</span>
         </nav>
-        <h1 className="t-h1">{title}</h1>
-        {description && <p className="t-lede">{description}</p>}
-        {children}
+        <div className="page-header-main">
+          <h1 className="t-h1">{title}</h1>
+          {description && <p className="t-lede">{description}</p>}
+        </div>
+        {children && <div className="page-header-extra">{children}</div>}
       </div>
     </header>
   );

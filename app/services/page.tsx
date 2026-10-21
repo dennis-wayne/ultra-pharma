@@ -26,7 +26,7 @@ export default function ServicesPage() {
       />
       <PageHeader
         title="Services"
-        description="Organised the way a product moves: approval, market entry, reimbursement, and lifecycle management."
+        description="Start with the stage your product is at. We can help you work through the requirements and agree what needs to happen next."
       />
       {serviceStages.map((stage, index) => (
         <section
@@ -45,7 +45,7 @@ export default function ServicesPage() {
                 </span>
                 <span className="t-index text-ink-500">Stage {stage.n}</span>
               </div>
-              <h2 className="t-h2 mb-5 mt-5">{stage.name}</h2>
+              <h2 className="t-h2 t-statement mb-5 mt-5">{stage.name}</h2>
               <p className="t-lede max-w-[34ch] text-ink-700">{stage.blurb}</p>
               {stage.href && (
                 <Link href={stage.href} className="btn btn-primary mt-7">
@@ -64,9 +64,9 @@ export default function ServicesPage() {
                     {service.description}
                   </p>
                   {service.produces && (
-                    <div className="mt-5 rounded-xl border border-rule bg-paper-raised p-4">
+                    <div className="service-output">
                       <span className="t-label block text-ink-500">
-                        What this produces
+                        What you receive
                       </span>
                       <p className="mb-0 mt-2 text-ink-900">
                         {service.produces}

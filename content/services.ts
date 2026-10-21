@@ -29,28 +29,30 @@ export const serviceStages: readonly ServiceStage[] = [
     name: "Approval",
     icon: "approval",
     blurb:
-      "Getting a healthcare product legally onto the Kenyan market, and keeping the quality systems behind it inspection-ready.",
+      "We help you prepare for registration in Kenya and keep the supporting quality systems ready for inspection.",
     services: [
       {
         name: "Regulatory strategy",
         icon: "regulatoryStrategy",
         description:
-          "Registration pathway selection, classification, gap analysis against Pharmacy and Poisons Board requirements, and a filing plan with realistic timelines.",
+          "We check how your product is classified, review the dossier against Pharmacy and Poisons Board requirements and agree a filing plan based on the work still needed.",
         produces: "A filing strategy and dossier gap register.",
       },
       {
         name: "Submissions and eCTD",
         icon: "submissions",
         description:
-          "Dossier compilation, eCTD publishing, agency correspondence, and management of queries through to determination.",
-        produces: "A submission-ready dossier and a query log with closure evidence.",
+          "We assemble the dossier, publish eCTD submissions and handle correspondence and queries while the authority reviews the file.",
+        produces:
+          "A submission-ready dossier and a query log with closure evidence.",
       },
       {
         name: "Compliance and quality",
         icon: "qualitySystems",
         description:
-          "Quality management systems, SOP development, GxP readiness, and inspection preparation.",
-        produces: "An SOP set, an audit-readiness assessment, and a remediation plan.",
+          "We help your team document procedures, review GxP readiness and prepare the quality systems for inspection.",
+        produces:
+          "An SOP set, an audit-readiness assessment, and a remediation plan.",
       },
     ],
   },
@@ -59,19 +61,19 @@ export const serviceStages: readonly ServiceStage[] = [
     name: "Market entry",
     icon: "marketEntry",
     blurb:
-      "Taking a registered product into additional markets without rebuilding the dossier each time.",
+      "Planning another market? We adapt your existing dossier to local requirements so you can reuse the work you have already done.",
     services: [
       {
         name: "Multi-market dossiers",
         icon: "multiMarketDossiers",
         description:
-          "Harmonised submissions for EAC and wider African markets, with local adaptation where each authority requires it.",
+          "We prepare harmonised submissions for EAC and wider African markets, then adapt the file to the requirements of each authority.",
       },
       {
         name: "Specialised therapeutics",
         icon: "specialisedTherapeutics",
         description:
-          "Pathways for products that do not fit standard routes: rare disease treatments, biologics, and advanced therapies.",
+          "Some products need a different approach. We help identify the route for rare disease treatments, biologics and advanced therapies.",
       },
     ],
   },
@@ -81,25 +83,25 @@ export const serviceStages: readonly ServiceStage[] = [
     icon: "reimbursement",
     href: "/services/reimbursement",
     blurb:
-      "Health product assessment and national benefit listing, from HTA dossier development to structured engagement with SHA and the panel secretariat.",
+      "We help you prepare the clinical and economic evidence for assessment and plan engagement with SHA and the panel secretariat.",
     services: [
       {
         name: "HTA dossier development",
         icon: "htaDossier",
         description:
-          "Assembling the evidence a health technology assessment requires: clinical effectiveness against an appropriate local comparator, safety, and the value case in a form assessors can evaluate.",
+          "We bring together clinical effectiveness, safety and value evidence around an appropriate local comparator, in a form assessors can review.",
       },
       {
         name: "Cost-effectiveness and budget-impact modelling",
         icon: "economicModelling",
         description:
-          "Incremental cost-effectiveness analysis using Kenyan cost and epidemiological inputs, and a budget-impact model against the relevant fund.",
+          "We model cost-effectiveness with Kenyan cost and disease data, then examine what funding the intervention could cost the relevant fund.",
       },
       {
         name: "Stakeholder engagement and SHA liaison",
         icon: "stakeholderEngagement",
         description:
-          "Structured engagement with the Ministry of Health, the Social Health Authority and the panel secretariat, sequenced so evidence arrives when it can be considered.",
+          "We help you prepare for discussions with the Ministry of Health, the Social Health Authority and the panel secretariat, including what evidence needs to be ready and when.",
       },
     ],
   },
@@ -107,18 +109,20 @@ export const serviceStages: readonly ServiceStage[] = [
     n: "04",
     name: "Lifecycle",
     icon: "lifecycle",
-    blurb: "Sustaining a product's value after approval.",
+    blurb:
+      "We help you manage the changes, renewals and obligations that continue after approval.",
     services: [
       {
         name: "Post-approval management",
         icon: "postApproval",
         description:
-          "Variations, renewals, pharmacovigilance obligations, and commitment tracking.",
+          "We keep track of variations, renewals, pharmacovigilance obligations and agreed commitments after approval.",
       },
       {
         name: "Label and indication expansion",
         icon: "labelExpansion",
-        description: "Evidence assembly and submissions to broaden an approved indication.",
+        description:
+          "We bring together the evidence and submissions needed to apply for a wider indication.",
       },
     ],
   },

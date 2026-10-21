@@ -1,0 +1,113 @@
+{
+  "sheets": [
+    {
+      "engravingOpacity": "0.92",
+      "fill": "rgb(24, 32, 30)",
+      "ink": "rgb(198, 206, 202)",
+      "selected": false,
+      "texts": [
+        {
+          "insidePlaneBounds": true,
+          "text": "Approval"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "Dossier review"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "Quality"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "Clinical"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "Module review"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "Filing plan"
+        }
+      ]
+    },
+    {
+      "engravingOpacity": "0.92",
+      "fill": "rgb(24, 32, 30)",
+      "ink": "rgb(198, 206, 202)",
+      "selected": false,
+      "texts": [
+        {
+          "insidePlaneBounds": true,
+          "text": "Market entry"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "Regional strategy"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "Kenya"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "East Africa"
+        }
+      ]
+    },
+    {
+      "engravingOpacity": "0.92",
+      "fill": "rgb(243, 245, 243)",
+      "ink": "rgb(16, 22, 21)",
+      "selected": true,
+      "texts": [
+        {
+          "insidePlaneBounds": true,
+          "text": "Reimbursement"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "Clinical + economic"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "Clinical evidence"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "Economic case"
+        }
+      ]
+    },
+    {
+      "engravingOpacity": "0.92",
+      "fill": "rgb(24, 32, 30)",
+      "ink": "rgb(198, 206, 202)",
+      "selected": false,
+      "texts": [
+        {
+          "insidePlaneBounds": true,
+          "text": "Lifecycle"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "Ongoing obligations"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "Monitoring"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "Variations"
+        },
+        {
+          "insidePlaneBounds": true,
+          "text": "Renewals"
+        }
+      ]
+    }
+  ],
+  "theme": "dark"
+}

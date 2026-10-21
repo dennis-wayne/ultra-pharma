@@ -14,7 +14,7 @@ export function TeamCard({ member }: { readonly member: TeamMember }) {
         <span className="t-label text-ink-500">Nairobi, Kenya</span>
       </div>
       <div className="mt-8">
-        <h3 className="t-h3 m-0">{member.name ?? member.role}</h3>
+        <h3 className="t-h3 t-editorial m-0">{member.name ?? member.role}</h3>
         <p className="mb-0 mt-2 text-ink-500">{member.role}</p>
         {member.credentials && (
           <p className="text-ink-700">{member.credentials}</p>

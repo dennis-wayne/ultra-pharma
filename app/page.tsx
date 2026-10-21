@@ -15,6 +15,7 @@ import { entries } from "@/content/entries";
 import { publicTeam } from "@/content/team";
 import { insights } from "@/content/insights";
 import { Mark } from "@/components/primitives/mark";
+import { HeroPathway } from "@/components/content/hero-pathway";
 
 export default function HomePage() {
   const showInsights = insights.length >= 3;
@@ -34,19 +35,23 @@ export default function HomePage() {
       <section id="sec-01" data-sec="01" className="hero">
         <div className="shell">
           <div className="hero-layout">
-            <div data-hero>
-              <p className="t-label m-0 text-ink-500">
+            <div data-hero className="hero-copy">
+              <p className="hero-discipline">
                 Regulatory affairs &amp; health technology assessment
               </p>
               <h1 className="t-hero">
-                <span>Precision in healthcare.</span>{" "}
-                <span>Confidence in regulation.</span>
+                <span>From evidence</span> <span>to access.</span>
               </h1>
+              <p className="hero-promise">
+                <span className="hero-promise-key">Precision</span>{" "}
+                <span>in healthcare.</span>{" "}
+                <span className="hero-promise-key">Confidence</span>{" "}
+                <span>in regulation.</span>
+              </p>
               <p className="hero-description">
-                Approval is no longer the finish line. We take healthcare
-                products through registration with the Pharmacy and Poisons
-                Board, and through the health technology assessment that informs
-                funded patient access.
+                We help you prepare for Pharmacy and Poisons Board registration
+                and make the case for funded access. Tell us about your product
+                and the question you need to answer.
               </p>
               <div className="hero-actions">
                 <Link href="#sec-02" className="btn btn-primary" data-magnetic>
@@ -57,41 +62,14 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div data-media-in className="hero-document">
-              <span className="hero-document-sheet" aria-hidden />
-              <div className="hero-document-inner">
-                <div className="hero-document-heading">
-                  <span className="t-label text-ink-500">
-                    The product pathway
-                  </span>
-                  <span className="t-index text-ink-500">
-                    Kenya / East Africa
-                  </span>
-                </div>
-                <div data-hero-stages>
-                  {stages.map((stage) => (
-                    <Link
-                      key={stage.n}
-                      href={stage.href}
-                      className="hero-stage"
-                      data-featured={stage.isNew || undefined}
-                    >
-                      <span>{stage.n}</span>
-                      <div>
-                        <strong>{stage.name}</strong>
-                        <p>{stage.question}</p>
-                      </div>
-                      <span aria-hidden className="text-ink-400">
-                        ↗
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-                <p className="mb-0 mt-5 border-t border-rule pt-5 text-sm text-ink-500">
-                  From regulatory approval to the evidence for funded access.
-                </p>
-              </div>
-            </div>
+            <HeroPathway
+              stages={stages.map(({ n, name, question, href }) => ({
+                n,
+                name,
+                question,
+                href,
+              }))}
+            />
           </div>
           <div className="hero-foot">
             <span>Independent expertise. In-country perspective.</span>
@@ -104,11 +82,11 @@ export default function HomePage() {
         <Reveal className="section-top">
           <div>
             <SectionIndex index="02" label="The pathway" />
-            <h2 className="t-h2">From approval to funded access</h2>
+            <h2 className="t-h2">Where does your product go next?</h2>
           </div>
           <p>
-            Four stages. A product can be registered and still sit outside the
-            benefits package. We work across the full pathway.
+            Registration is one part of the work. Your product may also need a
+            plan for another market, reimbursement or changes after approval.
           </p>
         </Reveal>
         <PathwayRail />
@@ -127,8 +105,8 @@ export default function HomePage() {
             <span className="t-label text-deep-ink-soft">
               Reimbursement / Stage 03
             </span>
-            <h2 className="t-h2 mb-6 mt-5">
-              Registered is not the same as reimbursed.
+            <h2 className="t-h2 t-statement mb-6 mt-5">
+              Registration does not settle the funding question.
             </h2>
             <p className="text-deep-ink-soft">
               Kenya replaced NHIF with the Social Health Authority under the
@@ -153,7 +131,7 @@ export default function HomePage() {
         <Reveal className="section-top">
           <div>
             <SectionIndex index="04" label="Services" />
-            <h2 className="t-h2">What each stage delivers</h2>
+            <h2 className="t-h2">Help with the work ahead</h2>
           </div>
           <Link href="/services" className="btn btn-secondary">
             All services
@@ -204,7 +182,7 @@ export default function HomePage() {
 
       <div className="chapter-divider">
         <div className="shell flex flex-wrap items-baseline justify-between gap-5">
-          <p>Precision in the detail. Confidence in the next step.</p>
+          <p>A clear plan matters as much as a complete dossier.</p>
           <span className="t-index text-ink-500">
             Ultra Pharma / The practice
           </span>
@@ -215,11 +193,11 @@ export default function HomePage() {
         <Reveal className="section-top">
           <div>
             <SectionIndex index="05" label="Practice" />
-            <h2 className="t-h2">Why partners choose Ultra Pharma</h2>
+            <h2 className="t-h2">What working with us looks like</h2>
           </div>
           <p>
-            Practical systems, in-country knowledge, and delivery models built
-            to move healthcare products forward in Kenya and across Africa.
+            You should know what we are working on, who is responsible and what
+            needs to happen next. Here is how we organise the work.
           </p>
         </Reveal>
         <div className="practice-bento" data-reveal-group>
@@ -233,11 +211,10 @@ export default function HomePage() {
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <Reveal>
             <SectionIndex index="06" label="People" />
-            <h2 className="t-h2 mb-6 mt-5">The people who do the work</h2>
+            <h2 className="t-h2 mb-6 mt-5">Start with a conversation</h2>
             <p className="max-w-[48ch] text-ink-700">
-              Start a conversation with our principal contact about your
-              product, the evidence you have, and the next decision you need to
-              make.
+              Talk to James Kamindo about your product, the evidence you have
+              and the decision you are preparing for.
             </p>
             <Link href="/practice" className="text-link mt-3">
               How the practice works
@@ -256,7 +233,7 @@ export default function HomePage() {
           <Reveal className="section-top">
             <div>
               <SectionIndex index="07" label="Insights" />
-              <h2 className="t-h2">Regulatory and access analysis</h2>
+              <h2 className="t-h2">A closer look at regulation and access</h2>
             </div>
             <Link href="/insights" className="btn btn-secondary">
               All insights
@@ -279,8 +256,8 @@ export default function HomePage() {
             <SectionIndex index="08" label="Contact" />
             <h2 className="t-h2 mb-6 mt-5">Talk to us</h2>
             <p className="mb-8 max-w-[46ch] text-ink-700">
-              Regulatory guidance, a proposal, or rapid-response support on
-              something already in motion.
+              A short outline of your product and the help you need is enough to
+              start. You can use the form or contact us directly.
             </p>
             <ContactDetails />
             <p className="mt-6 text-sm text-ink-500">

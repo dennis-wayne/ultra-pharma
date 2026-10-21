@@ -5,10 +5,7 @@ import type { IconName } from "@/lib/icons";
  * stays stable; the registry holds the binding.
  */
 export type StageIcon =
-  | "approval"
-  | "marketEntry"
-  | "reimbursement"
-  | "lifecycle";
+  "approval" | "marketEntry" | "reimbursement" | "lifecycle";
 
 /**
  * A deliverable is a labelled thing, so it carries a mark of its own rather
@@ -42,7 +39,7 @@ export const stages: readonly Stage[] = [
     isNew: false,
     href: "/services#stage-01",
     blurb:
-      "Getting a healthcare product legally onto the Kenyan market, and keeping the quality systems behind it inspection-ready.",
+      "We help you prepare for registration in Kenya and keep the supporting quality systems ready for inspection.",
     deliverables: [
       { label: "Regulatory strategy", icon: "regulatoryStrategy" },
       { label: "Submissions and eCTD", icon: "submissions" },
@@ -58,7 +55,7 @@ export const stages: readonly Stage[] = [
     isNew: false,
     href: "/services#stage-02",
     blurb:
-      "Taking a registered product into additional markets without rebuilding the dossier each time.",
+      "We adapt your existing dossier to the next market, keeping local requirements in view.",
     deliverables: [
       { label: "Multi-market dossiers", icon: "multiMarketDossiers" },
       { label: "Local adaptation", icon: "localAdaptation" },
@@ -74,7 +71,7 @@ export const stages: readonly Stage[] = [
     isNew: true,
     href: "/services/reimbursement",
     blurb:
-      "Building the evidence that supports inclusion in the national benefits package, so an approved product becomes a funded one.",
+      "We help you prepare the evidence authorities need when they assess the case for funded access.",
     deliverables: [
       { label: "HTA dossiers", icon: "htaDossier" },
       { label: "Economic modelling", icon: "economicModelling" },
@@ -90,7 +87,7 @@ export const stages: readonly Stage[] = [
     isNew: false,
     href: "/services#stage-04",
     blurb:
-      "Sustaining a product's value after approval, from variations and renewals to broadening an approved indication.",
+      "We help you manage renewals, changes and the work that continues after approval.",
     deliverables: [
       { label: "Post-approval monitoring", icon: "postApproval" },
       { label: "Label expansion", icon: "labelExpansion" },

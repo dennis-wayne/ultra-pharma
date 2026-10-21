@@ -17,22 +17,22 @@ export const metadata: Metadata = {
 const steps: readonly { title: string; description: string; icon: IconName }[] =
   [
     {
-      title: "Confidential intake",
+      title: "Start with an outline",
       icon: "confidentiality",
       description:
-        "Begin with an outline of your enquiry. A confidentiality agreement is available before proprietary dossier data or product details are shared.",
+        "Start with a short outline. We can arrange a confidentiality agreement before you share proprietary product details or dossier files.",
     },
     {
-      title: "A named lead",
+      title: "Know who to call",
       icon: "namedLead",
       description:
-        "Your enquiry is aligned with a named point of contact, with scope and responsibilities agreed before work begins.",
+        "You have a named person to speak to, with the scope and responsibilities agreed before work begins.",
     },
     {
-      title: "A practical roadmap",
+      title: "Agree a plan",
       icon: "filingRoadmap",
       description:
-        "Once an engagement begins, the work is organised around a document register, milestones and the applicable requirements.",
+        "Once we agree the work, we set out the milestones and keep a shared record of the documents and requirements.",
     },
   ];
 export default function ContactPage() {
@@ -43,8 +43,8 @@ export default function ContactPage() {
         data={breadcrumbSchema([{ name: "Contact", path: "/contact" }])}
       />
       <PageHeader
-        title="Let's talk about your next step"
-        description="A registration question, an evidence gap, or a regional market-entry plan. Start with a short outline of what you need."
+        title="Let's talk about your product"
+        description="Tell us what you are working on and where you need help. You can use the form or contact us directly."
       />
       <section className="shell section-space">
         <div className="grid items-start gap-12 lg:grid-cols-[.85fr_1.15fr] lg:gap-20">

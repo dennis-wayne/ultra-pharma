@@ -16,6 +16,7 @@ import {
 } from "@/content/reimbursement";
 import { breadcrumbSchema, serviceSchema } from "@/lib/schema";
 import { Mark } from "@/components/primitives/mark";
+import { AccessIllustration } from "@/components/content/regulatory-art";
 export const metadata: Metadata = {
   title: "Health product assessment and benefit listing",
   description:
@@ -41,9 +42,9 @@ export default function ReimbursementPage() {
       />
       <IndexRail sections={["01", "02", "03", "04", "05", "06"]} />
       <PageHeader
-        title="Health product assessment and national benefit listing"
+        title="Make the case for funded access"
         parent={{ label: "Services", href: "/services" }}
-        description="Preparing the evidence that supports assessment for Kenya's national health benefits package. Connecting regulatory approval with the case for funded access."
+        description="Registration answers whether your product may be sold. We help you prepare the evidence authorities use when they assess whether it should be funded."
       />
       <Section index="01" bordered>
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
@@ -85,6 +86,7 @@ export default function ReimbursementPage() {
           </Reveal>
           <Reveal className="panel">
             <span className="t-label text-ink-500">The access chain</span>
+            <AccessIllustration />
             <ol className="mb-8 mt-7 list-none p-0">
               {accessChain.map((step, i) => (
                 <li
@@ -116,7 +118,7 @@ export default function ReimbursementPage() {
               label="What it means for your product"
               tone="deep"
             />
-            <h2 className="t-h2 mb-0 mt-5">
+            <h2 className="t-h2 t-statement mb-0 mt-5">
               Registration establishes that a product may be sold. It does not
               establish that it will be funded.
             </h2>
@@ -135,11 +137,12 @@ export default function ReimbursementPage() {
         <Reveal className="section-top">
           <div>
             <SectionIndex index="03" label="What we do" />
-            <h2 className="t-h2">HTA and reimbursement services</h2>
+            <h2 className="t-h2">Help with the assessment case</h2>
           </div>
           <p>
-            Clinical evidence, health economics and structured engagement
-            brought together in a clear assessment case.
+            We review the clinical and economic evidence, identify what is
+            missing and help you prepare for discussions with the relevant
+            authorities.
           </p>
         </Reveal>
         <div data-reveal-group className="grid gap-6 md:grid-cols-3">
@@ -173,9 +176,7 @@ export default function ReimbursementPage() {
         <div className="grid items-start gap-12 lg:grid-cols-[.85fr_1.15fr] lg:gap-20">
           <Reveal className="lg:sticky lg:top-32">
             <SectionIndex index="04" label="The evidence" />
-            <h2 className="t-h2 mb-6 mt-5">
-              Seven areas an assessment considers
-            </h2>
+            <h2 className="t-h2 mb-6 mt-5">What goes into an assessment?</h2>
             <p className="text-ink-700">
               A coherent evidence base spans clinical, economic and operational
               questions. The requirements for an individual intervention depend
@@ -191,7 +192,7 @@ export default function ReimbursementPage() {
         <Reveal className="section-top">
           <div>
             <SectionIndex index="05" label="How we work" />
-            <h2 className="t-h2">Phases of engagement</h2>
+            <h2 className="t-h2">How we work with you</h2>
           </div>
           <p>
             Begin with feasibility, build the evidence, and support engagement

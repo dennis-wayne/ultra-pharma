@@ -89,7 +89,7 @@ export default async function InsightPage({
             Back to insights
           </Link>
           <p className="t-label">{post.category}</p>
-          <h1 className="t-h1">{post.title}</h1>
+          <h1 className="t-h1 t-editorial">{post.title}</h1>
           <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm text-ink-500">
             <time dateTime={post.datePublished}>{post.displayDate}</time>
             <span>{post.readingTime}</span>
