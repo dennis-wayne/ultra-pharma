@@ -1080,10 +1080,16 @@
   #sec-04 .section-top h2 {
     max-width: 24ch;
   }
-  #sec-05 .section-top h2 {
+  #sec-05 .section-top h2,
+  .home-practice .section-top h2 {
     max-width: 25ch;
   }
-  #sec-07 .section-top h2 {
+  .home-insights {
+    margin-top: clamp(72px, 9vw, 128px);
+    padding-top: clamp(48px, 5vw, 72px);
+    border-top: 1px solid var(--rule-strong);
+  }
+  .home-insights .section-top h2 {
     max-width: 28ch;
   }
   .chapter-divider {

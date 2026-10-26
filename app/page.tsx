@@ -6,29 +6,18 @@ import { Reveal } from "@/components/primitives/reveal";
 import { PathwayRail } from "@/components/content/pathway-rail";
 import { FundsDiagram } from "@/components/content/funds-diagram";
 import { NumberedEntry } from "@/components/content/numbered-entry";
-import { TeamCard } from "@/components/content/team-card";
 import { InsightCard } from "@/components/content/insight-card";
 import { ContactDetails } from "@/components/content/contact-details";
 import { ContactForm } from "@/components/forms/contact-form";
 import { stages } from "@/content/pathway";
 import { entries } from "@/content/entries";
-import { publicTeam } from "@/content/team";
 import { insights } from "@/content/insights";
 import { Mark } from "@/components/primitives/mark";
 import { HeroPathway } from "@/components/content/hero-pathway";
 
 export default function HomePage() {
   const showInsights = insights.length >= 3;
-  const sections = [
-    "01",
-    "02",
-    "03",
-    "04",
-    "05",
-    "06",
-    ...(showInsights ? ["07"] : []),
-    "08",
-  ];
+  const sections = ["01", "02", "03", "04", "05", "06"];
   return (
     <>
       <IndexRail sections={sections} />
@@ -92,40 +81,32 @@ export default function HomePage() {
         <PathwayRail />
       </Section>
 
-      <section
-        id="sec-03"
-        data-sec="03"
-        className="bg-paper-deep text-deep-ink"
-      >
-        <div className="shell section-space grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          <div data-slide-in="left">
-            <FundsDiagram />
-          </div>
-          <div data-slide-in="right">
-            <span className="t-label text-deep-ink-soft">
-              Reimbursement / Stage 03
-            </span>
-            <h2 className="t-h2 t-statement mb-6 mt-5">
-              Registration does not settle the funding question.
-            </h2>
-            <p className="text-deep-ink-soft">
-              Kenya replaced NHIF with the Social Health Authority under the
-              Social Health Insurance Act 2023. What SHA pays for, and at what
-              tariff, is shaped by health technology assessment through the
-              Benefits Package and Tariffs Advisory Panel.
-            </p>
-            <p className="mt-5 text-deep-ink-soft">
-              A product can be fully registered with the Pharmacy and Poisons
-              Board and still sit outside the benefits package, competing on
-              out-of-pocket price against a funded alternative. Closing that gap
-              is a different discipline from registration.
-            </p>
-            <Link href="/services/reimbursement" className="btn btn-deep mt-7">
-              Explore health product assessment
-            </Link>
-          </div>
+      <div className="chapter-divider">
+        <div className="shell flex flex-wrap items-baseline justify-between gap-5">
+          <p>A clear plan matters as much as a complete dossier.</p>
+          <span className="t-index text-ink-500">
+            Ultra Pharma / The practice
+          </span>
         </div>
-      </section>
+      </div>
+
+      <Section index="03" width="wide" className="home-practice">
+        <Reveal className="section-top">
+          <div>
+            <SectionIndex index="03" label="Practice" />
+            <h2 className="t-h2">What working with us looks like</h2>
+          </div>
+          <p>
+            You should know what we are working on, who is responsible and what
+            needs to happen next. Here is how we organise the work.
+          </p>
+        </Reveal>
+        <div className="practice-bento" data-reveal-group>
+          {entries.map((entry) => (
+            <NumberedEntry key={entry.n} entry={entry} />
+          ))}
+        </div>
+      </Section>
 
       <Section index="04" width="wide">
         <Reveal className="section-top">
@@ -178,82 +159,70 @@ export default function HomePage() {
             </article>
           ))}
         </div>
-      </Section>
-
-      <div className="chapter-divider">
-        <div className="shell flex flex-wrap items-baseline justify-between gap-5">
-          <p>A clear plan matters as much as a complete dossier.</p>
-          <span className="t-index text-ink-500">
-            Ultra Pharma / The practice
-          </span>
-        </div>
-      </div>
-
-      <Section index="05" width="wide">
-        <Reveal className="section-top">
-          <div>
-            <SectionIndex index="05" label="Practice" />
-            <h2 className="t-h2">What working with us looks like</h2>
-          </div>
-          <p>
-            You should know what we are working on, who is responsible and what
-            needs to happen next. Here is how we organise the work.
-          </p>
-        </Reveal>
-        <div className="practice-bento" data-reveal-group>
-          {entries.map((entry) => (
-            <NumberedEntry key={entry.n} entry={entry} />
-          ))}
-        </div>
-      </Section>
-
-      <Section index="06" tone="sunk" bordered>
-        <div className="grid items-center gap-10 lg:grid-cols-2">
-          <Reveal>
-            <SectionIndex index="06" label="People" />
-            <h2 className="t-h2 mb-6 mt-5">Start with a conversation</h2>
-            <p className="max-w-[48ch] text-ink-700">
-              Talk to James Kamindo about your product, the evidence you have
-              and the decision you are preparing for.
-            </p>
-            <Link href="/practice" className="text-link mt-3">
-              How the practice works
-            </Link>
-          </Reveal>
-          <div data-reveal-group>
-            {publicTeam.map((member) => (
-              <TeamCard key={member.initials} member={member} />
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {showInsights && (
-        <Section index="07">
-          <Reveal className="section-top">
-            <div>
-              <SectionIndex index="07" label="Insights" />
-              <h2 className="t-h2">A closer look at regulation and access</h2>
+        {showInsights && (
+          <div className="home-insights">
+            <Reveal className="section-top">
+              <div>
+                <span className="t-label text-ink-500">
+                  Insights from the practice
+                </span>
+                <h2 className="t-h2">A closer look at regulation and access</h2>
+              </div>
+              <Link href="/insights" className="btn btn-secondary">
+                All insights
+              </Link>
+            </Reveal>
+            <div
+              data-reveal-group
+              className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+            >
+              {insights.slice(0, 3).map((post) => (
+                <InsightCard key={post.slug} post={post} />
+              ))}
             </div>
-            <Link href="/insights" className="btn btn-secondary">
-              All insights
-            </Link>
-          </Reveal>
-          <div
-            data-reveal-group
-            className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-          >
-            {insights.slice(0, 3).map((post) => (
-              <InsightCard key={post.slug} post={post} />
-            ))}
           </div>
-        </Section>
-      )}
+        )}
+      </Section>
 
-      <Section index="08" bordered>
+      <section
+        id="sec-05"
+        data-sec="05"
+        className="bg-paper-deep text-deep-ink"
+      >
+        <div className="shell section-space grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+          <div data-slide-in="left">
+            <FundsDiagram />
+          </div>
+          <div data-slide-in="right">
+            <span className="t-label text-deep-ink-soft">
+              Reimbursement / Stage 03
+            </span>
+            <h2 className="t-h2 t-statement mb-6 mt-5">
+              Registration does not settle the funding question.
+            </h2>
+            <p className="text-deep-ink-soft">
+              Kenya replaced NHIF with the Social Health Authority under the
+              Social Health Insurance Act 2023. What SHA pays for, and at what
+              tariff, is shaped by health technology assessment through the
+              Benefits Package and Tariffs Advisory Panel.
+            </p>
+            <p className="mt-5 text-deep-ink-soft">
+              A product can be fully registered with the Pharmacy and Poisons
+              Board and still sit outside the benefits package, competing on
+              out-of-pocket price against a funded alternative. Closing that gap
+              is a different discipline from registration.
+            </p>
+            <Link href="/services/reimbursement" className="btn btn-deep mt-7">
+              Explore health product assessment
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <Section index="06" bordered>
         <div className="grid items-start gap-12 lg:grid-cols-[.85fr_1.15fr] lg:gap-20">
           <Reveal>
-            <SectionIndex index="08" label="Contact" />
+            <SectionIndex index="06" label="Contact" />
             <h2 className="t-h2 mb-6 mt-5">Talk to us</h2>
             <p className="mb-8 max-w-[46ch] text-ink-700">
               A short outline of your product and the help you need is enough to
